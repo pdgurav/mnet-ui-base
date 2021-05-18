@@ -4,14 +4,14 @@ import { Accordion, AccordionPanel, Anchor, Box, Button, Calendar, CheckBox, Clo
 import { mnet, dark } from 'mnet-ui-base/themes';
 import { generate } from 'mnet-ui-base/themes/base';
 import { deepMerge } from 'mnet-ui-base/utils'; // import { neo } from 'mnet-ui-base-theme-neo';
-
-import { hb } from 'mnet-ui-base-theme-hb'; // import { cdp } from 'mnet-ui-base-theme-cdp';
+// import { hb } from 'mnet-ui-base-theme-hb';
+// import { cdp } from 'mnet-ui-base-theme-cdp';
 
 var themes = {
   // hb,
   // neo,
   // cdp,
-  hb: hb
+  dark: dark
 };
 
 var Components = function Components() {
