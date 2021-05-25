@@ -15,8 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 var Toast = function Toast() {
   var addToastDefault = function addToastDefault() {
     (0, _.addToast)({
-      msg: 'I am default toast',
-      autoClose: false
+      msg: 'I am default toast'
     });
   };
 
@@ -38,6 +37,13 @@ var Toast = function Toast() {
     (0, _.addToast)({
       msg: 'I am just a warning',
       type: 'warning'
+    });
+  };
+
+  var addToastAutoClose = function addToastAutoClose() {
+    (0, _.addToast)({
+      msg: 'I am default toast',
+      autoClose: false
     });
   };
 
@@ -78,6 +84,13 @@ var Toast = function Toast() {
     }),
     label: /*#__PURE__*/_react["default"].createElement(_mnetUiBase.Text, null, /*#__PURE__*/_react["default"].createElement("strong", null, "Add Warning")),
     onClick: addToastWarning,
+    plain: true
+  }), /*#__PURE__*/_react["default"].createElement(_mnetUiBase.Button, {
+    icon: /*#__PURE__*/_react["default"].createElement(_grommetIcons.Add, {
+      color: "brand"
+    }),
+    label: /*#__PURE__*/_react["default"].createElement(_mnetUiBase.Text, null, /*#__PURE__*/_react["default"].createElement("strong", null, "Prevent autoClose")),
+    onClick: addToastAutoClose,
     plain: true
   })));
 };

@@ -7,8 +7,7 @@ import { addToast } from '..';
 var Toast = function Toast() {
   var addToastDefault = function addToastDefault() {
     addToast({
-      msg: 'I am default toast',
-      autoClose: false
+      msg: 'I am default toast'
     });
   };
 
@@ -30,6 +29,13 @@ var Toast = function Toast() {
     addToast({
       msg: 'I am just a warning',
       type: 'warning'
+    });
+  };
+
+  var addToastAutoClose = function addToastAutoClose() {
+    addToast({
+      msg: 'I am default toast',
+      autoClose: false
     });
   };
 
@@ -70,6 +76,13 @@ var Toast = function Toast() {
     }),
     label: /*#__PURE__*/React.createElement(Text, null, /*#__PURE__*/React.createElement("strong", null, "Add Warning")),
     onClick: addToastWarning,
+    plain: true
+  }), /*#__PURE__*/React.createElement(Button, {
+    icon: /*#__PURE__*/React.createElement(Add, {
+      color: "brand"
+    }),
+    label: /*#__PURE__*/React.createElement(Text, null, /*#__PURE__*/React.createElement("strong", null, "Prevent autoClose")),
+    onClick: addToastAutoClose,
     plain: true
   })));
 };

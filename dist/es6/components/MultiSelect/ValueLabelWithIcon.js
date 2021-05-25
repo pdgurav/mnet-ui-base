@@ -49,8 +49,7 @@ var ValueLabelWithIcon = function ValueLabelWithIcon(_ref) {
     direction: "row",
     align: "center",
     pad: {
-      left: 'large',
-      vertical: 'small'
+      left: 'large'
     }
   }, labelWrap), withInclusionExclusion && isExcluded && ExcIcon && /*#__PURE__*/React.createElement(Box, {
     width: {

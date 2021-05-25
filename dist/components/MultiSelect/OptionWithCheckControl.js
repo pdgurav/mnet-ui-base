@@ -61,6 +61,31 @@ var OptionWithCheckControl = function OptionWithCheckControl(_ref) {
       _exclude$check = exclude.check,
       excCheck = _exclude$check === void 0 ? 'subtract' : _exclude$check;
 
+  var getIcon = function getIcon(check) {
+    switch (check) {
+      case 'check':
+        return /*#__PURE__*/_react["default"].createElement(_FormCheckmark.FormCheckmark, theme.multiselect.checkbox.checkmark);
+
+      case 'close':
+        return /*#__PURE__*/_react["default"].createElement(_FormClose.FormClose, theme.multiselect.checkbox.checkmark);
+
+      case 'add':
+        return /*#__PURE__*/_react["default"].createElement(_Add.Add, _extends({}, theme.multiselect.checkbox.checkmark, {
+          color: inclusionExclusion ? theme.multiselect.includeBtn.color : 'brand',
+          size: "small"
+        }));
+
+      case 'subtract':
+        return /*#__PURE__*/_react["default"].createElement(_FormSubtract.FormSubtract, _extends({}, theme.multiselect.checkbox.checkmark, {
+          color: theme.multiselect.excludeBtn.color,
+          size: "small"
+        }));
+
+      default:
+        return null;
+    }
+  };
+
   var renderCheckbox = function renderCheckbox(check, exc) {
     return /*#__PURE__*/_react["default"].createElement(_StyledMultiSelect.CheckBoxWrapper, theme.multiselect.checkbox.box, /*#__PURE__*/_react["default"].createElement(_StyledMultiSelect.CheckBox, _extends({
       role: "checkbox",
@@ -74,13 +99,7 @@ var OptionWithCheckControl = function OptionWithCheckControl(_ref) {
         return onSelect(event, exc, index);
       } : undefined,
       background: (exc ? (0, _colors.normalizeColor)(excBackground, theme) : (0, _colors.normalizeColor)(incBackground, theme)) || 'white'
-    }), (selected || !selected || inclusionExclusion && isExcluded === null) && /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, check === 'check' && /*#__PURE__*/_react["default"].createElement(_FormCheckmark.FormCheckmark, theme.multiselect.checkbox.checkmark), check === 'close' && /*#__PURE__*/_react["default"].createElement(_FormClose.FormClose, theme.multiselect.checkbox.checkmark), check === 'add' && /*#__PURE__*/_react["default"].createElement(_Add.Add, _extends({}, theme.multiselect.checkbox.checkmark, {
-      color: inclusionExclusion ? theme.multiselect.includeBtn.color : 'brand',
-      size: "small"
-    })), check === 'subtract' && /*#__PURE__*/_react["default"].createElement(_FormSubtract.FormSubtract, _extends({}, theme.multiselect.checkbox.checkmark, {
-      color: theme.multiselect.excludeBtn.color,
-      size: "small"
-    })))));
+    }), (selected || !selected || inclusionExclusion && isExcluded === null) && getIcon(check)));
   };
 
   return /*#__PURE__*/_react["default"].createElement(_StyledMultiSelect.SelectedOption, _extends({}, selectOptionsStyle, {

@@ -41,6 +41,31 @@ var OptionWithCheckControl = function OptionWithCheckControl(_ref) {
       _exclude$check = exclude.check,
       excCheck = _exclude$check === void 0 ? 'subtract' : _exclude$check;
 
+  var getIcon = function getIcon(check) {
+    switch (check) {
+      case 'check':
+        return /*#__PURE__*/React.createElement(FormCheckmark, theme.multiselect.checkbox.checkmark);
+
+      case 'close':
+        return /*#__PURE__*/React.createElement(FormClose, theme.multiselect.checkbox.checkmark);
+
+      case 'add':
+        return /*#__PURE__*/React.createElement(Add, _extends({}, theme.multiselect.checkbox.checkmark, {
+          color: inclusionExclusion ? theme.multiselect.includeBtn.color : 'brand',
+          size: "small"
+        }));
+
+      case 'subtract':
+        return /*#__PURE__*/React.createElement(FormSubtract, _extends({}, theme.multiselect.checkbox.checkmark, {
+          color: theme.multiselect.excludeBtn.color,
+          size: "small"
+        }));
+
+      default:
+        return null;
+    }
+  };
+
   var renderCheckbox = function renderCheckbox(check, exc) {
     return /*#__PURE__*/React.createElement(CheckBoxWrapper, theme.multiselect.checkbox.box, /*#__PURE__*/React.createElement(CheckBox, _extends({
       role: "checkbox",
@@ -54,13 +79,7 @@ var OptionWithCheckControl = function OptionWithCheckControl(_ref) {
         return onSelect(event, exc, index);
       } : undefined,
       background: (exc ? normalizeColor(excBackground, theme) : normalizeColor(incBackground, theme)) || 'white'
-    }), (selected || !selected || inclusionExclusion && isExcluded === null) && /*#__PURE__*/React.createElement(React.Fragment, null, check === 'check' && /*#__PURE__*/React.createElement(FormCheckmark, theme.multiselect.checkbox.checkmark), check === 'close' && /*#__PURE__*/React.createElement(FormClose, theme.multiselect.checkbox.checkmark), check === 'add' && /*#__PURE__*/React.createElement(Add, _extends({}, theme.multiselect.checkbox.checkmark, {
-      color: inclusionExclusion ? theme.multiselect.includeBtn.color : 'brand',
-      size: "small"
-    })), check === 'subtract' && /*#__PURE__*/React.createElement(FormSubtract, _extends({}, theme.multiselect.checkbox.checkmark, {
-      color: theme.multiselect.excludeBtn.color,
-      size: "small"
-    })))));
+    }), (selected || !selected || inclusionExclusion && isExcluded === null) && getIcon(check)));
   };
 
   return /*#__PURE__*/React.createElement(SelectedOption, _extends({}, selectOptionsStyle, {
