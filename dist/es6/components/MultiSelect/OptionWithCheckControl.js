@@ -27,7 +27,9 @@ var OptionWithCheckControl = function OptionWithCheckControl(_ref) {
       _theme$multiselect$ch2 = _theme$multiselect$ch.include,
       include = _theme$multiselect$ch2 === void 0 ? {} : _theme$multiselect$ch2,
       _theme$multiselect$ch3 = _theme$multiselect$ch.exclude,
-      exclude = _theme$multiselect$ch3 === void 0 ? {} : _theme$multiselect$ch3;
+      exclude = _theme$multiselect$ch3 === void 0 ? {} : _theme$multiselect$ch3,
+      _theme$multiselect$ch4 = _theme$multiselect$ch.showUnSelected,
+      showUnSelected = _theme$multiselect$ch4 === void 0 ? true : _theme$multiselect$ch4;
   var _include$background = include.background,
       incBackground = _include$background === void 0 ? 'white' : _include$background,
       _include$color = include.color,
@@ -66,6 +68,11 @@ var OptionWithCheckControl = function OptionWithCheckControl(_ref) {
     }
   };
 
+  var getBackground = function getBackground(exc) {
+    if (!selected && !showUnSelected && isExcluded !== null) return 'white';
+    return (exc ? normalizeColor(excBackground, theme) : normalizeColor(incBackground, theme)) || 'white';
+  };
+
   var renderCheckbox = function renderCheckbox(check, exc) {
     return /*#__PURE__*/React.createElement(CheckBoxWrapper, theme.multiselect.checkbox.box, /*#__PURE__*/React.createElement(CheckBox, _extends({
       role: "checkbox",
@@ -78,8 +85,8 @@ var OptionWithCheckControl = function OptionWithCheckControl(_ref) {
       onClick: inclusionExclusion && isExcluded === null ? function (event) {
         return onSelect(event, exc, index);
       } : undefined,
-      background: (exc ? normalizeColor(excBackground, theme) : normalizeColor(incBackground, theme)) || 'white'
-    }), (selected || !selected || inclusionExclusion && isExcluded === null) && getIcon(check)));
+      background: getBackground(exc)
+    }), (selected || showUnSelected || inclusionExclusion && isExcluded === null) && getIcon(check)));
   };
 
   return /*#__PURE__*/React.createElement(SelectedOption, _extends({}, selectOptionsStyle, {

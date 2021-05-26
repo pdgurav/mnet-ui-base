@@ -90,12 +90,11 @@ var Tooltip = /*#__PURE__*/forwardRef(function (_ref, ref) {
     elevation: "none",
     plain: true,
     style: {
-      boxShadow: tooptip.boxShadow,
+      boxShadow: null,
       maxWidth: tooptip.maxWidth
     }
   }, /*#__PURE__*/React.createElement(ArrowWrap, {
-    position: position,
-    background: tooptip.background || 'dark-1'
+    position: position
   }, /*#__PURE__*/React.createElement(Arrow, {
     position: position,
     showArrow: showArrow

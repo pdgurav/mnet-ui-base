@@ -108,12 +108,11 @@ var Tooltip = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
     elevation: "none",
     plain: true,
     style: {
-      boxShadow: tooptip.boxShadow,
+      boxShadow: null,
       maxWidth: tooptip.maxWidth
     }
   }, /*#__PURE__*/_react["default"].createElement(_StyledTooltip.ArrowWrap, {
-    position: position,
-    background: tooptip.background || 'dark-1'
+    position: position
   }, /*#__PURE__*/_react["default"].createElement(_StyledTooltip.Arrow, {
     position: position,
     showArrow: showArrow
