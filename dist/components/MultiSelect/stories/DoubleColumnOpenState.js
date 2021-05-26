@@ -12,42 +12,27 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var options = [{
   id: 1,
-  label: 'Test 1'
+  label: 'Desktop'
 }, {
   id: 2,
-  label: 'Test 2'
+  label: 'Mobile'
 }, {
   id: 3,
-  label: 'Test 3'
+  label: 'Tablet'
 }, {
   id: 4,
-  label: 'Test 4'
+  label: 'Television'
 }, {
   id: 5,
-  label: 'Test 5'
-}, {
-  id: 6,
-  label: 'Test 6'
-}, {
-  id: 7,
-  label: 'Test 7'
-}, {
-  id: 8,
-  label: 'Test 8'
-}, {
-  id: 9,
-  label: 'Test 9'
-}, {
-  id: 10,
-  label: 'Test 10'
+  label: 'Bot'
 }];
 
 var Example = function Example() {
-  var _useState = (0, _react.useState)([]),
+  var _useState = (0, _react.useState)(['Mobile', 'Tablet']),
       value = _useState[0],
       setValue = _useState[1];
 
-  var _useState2 = (0, _react.useState)(null),
+  var _useState2 = (0, _react.useState)(false),
       isExcluded = _useState2[0],
       setIncExc = _useState2[1];
 
@@ -61,29 +46,31 @@ var Example = function Example() {
     value: value,
     labelKey: "label",
     valueKey: {
-      key: 'id',
+      key: 'label',
       reduce: true
     },
     onValueChange: function onValueChange(nextValue) {
       return setValue(nextValue);
     },
     layout: "double-column",
-    width: "medium",
+    width: "large",
     height: "medium",
     searchPlaceholder: "Search",
     searchable: true,
     withSelectAll: true,
     withOptionChips: true,
-    withUpdateCancelButtons: true,
     withInclusionExclusion: true,
     isExcluded: isExcluded,
     onIncExcChange: function onIncExcChange(nextIncExc) {
       return setIncExc(nextIncExc);
     },
-    renderEmptySelected: /*#__PURE__*/_react["default"].createElement("span", null, "Empty")
+    renderEmptySelected: /*#__PURE__*/_react["default"].createElement(_mnetUiBase.Text, null, "No Selection"),
+    isEnableOutSideClick: true,
+    shouldRenderInDrop: true,
+    isOpenState: true
   }));
 };
 
-(0, _react2.storiesOf)('MultiSelect', module).add('Double Column', function () {
+(0, _react2.storiesOf)('MultiSelect', module).add('Double Column Open State', function () {
   return /*#__PURE__*/_react["default"].createElement(Example, null);
 });

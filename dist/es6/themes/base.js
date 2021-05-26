@@ -1290,14 +1290,14 @@ export var generate = function generate(baseSpacing, scale) {
           icon: Success,
           extend: {
             color: 'status-ok',
-            size: 'large'
+            size: 'small'
           }
         },
         exclude: {
           icon: Block,
           extend: {
             color: 'status-error',
-            size: 'large'
+            size: 'small'
           }
         }
       }

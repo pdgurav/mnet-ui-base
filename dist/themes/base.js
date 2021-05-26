@@ -1320,14 +1320,14 @@ var generate = function generate(baseSpacing, scale) {
           icon: _Select.Select,
           extend: {
             color: 'status-ok',
-            size: 'large'
+            size: 'small'
           }
         },
         exclude: {
           icon: _Split.Split,
           extend: {
             color: 'status-error',
-            size: 'large'
+            size: 'small'
           }
         }
       }
