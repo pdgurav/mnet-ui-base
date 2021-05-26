@@ -192,7 +192,16 @@ var MultiSelect = function MultiSelect(_ref) {
     return null;
   };
 
+  var getkeyField = function getkeyField(key) {
+    return typeof key === 'object' ? getkeyField(key.key) : key;
+  };
+
+  var shouldRenderLabel = function shouldRenderLabel() {
+    return !(!valueKey || !labelKey || getkeyField(valueKey) === getkeyField(labelKey));
+  };
+
   var renderLabel = function renderLabel() {
+    console.log(shouldRenderLabel(), value);
     return /*#__PURE__*/_react["default"].createElement(_ValueLabelWithIcon.ValueLabelWithIcon, {
       showCount: showCount,
       rowCount: rowCount,
@@ -200,11 +209,11 @@ var MultiSelect = function MultiSelect(_ref) {
       isExcluded: isExcluded,
       size: size,
       placeholder: placeholder,
-      value: custom ? value : (options || []).filter(function (obj) {
+      value: shouldRenderLabel() ? (options || []).filter(function (obj) {
         return value.includes((0, _utils.applyKey)(obj, valueKey));
       }).map(function (optionObj) {
         return (0, _utils.applyKey)(optionObj, labelKey);
-      })
+      }) : value
     });
   };
 
