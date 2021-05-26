@@ -188,7 +188,6 @@ var MultiSelect = function MultiSelect(_ref) {
   };
 
   var renderLabel = function renderLabel() {
-    console.log(shouldRenderLabel(), value);
     return /*#__PURE__*/React.createElement(ValueLabelWithIcon, {
       showCount: showCount,
       rowCount: rowCount,
