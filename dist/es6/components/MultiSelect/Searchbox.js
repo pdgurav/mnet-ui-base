@@ -35,7 +35,7 @@ var Searchbox = function Searchbox(_ref) {
     onClick: onCancel,
     plain: true,
     style: {
-      position: 'relative',
+      position: 'absolute',
       right: '15px'
     }
   }, /*#__PURE__*/React.createElement(CollapsibleIcon, {
