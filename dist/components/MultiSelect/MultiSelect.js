@@ -208,7 +208,7 @@ var MultiSelect = function MultiSelect(_ref) {
       isExcluded: isExcluded,
       size: size,
       placeholder: placeholder,
-      value: shouldRenderLabel() ? (options || []).filter(function (obj) {
+      value: shouldRenderLabel() && !custom ? (options || []).filter(function (obj) {
         return value.includes((0, _utils.applyKey)(obj, valueKey));
       }).map(function (optionObj) {
         return (0, _utils.applyKey)(optionObj, labelKey);

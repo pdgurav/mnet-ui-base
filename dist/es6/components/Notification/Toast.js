@@ -34,9 +34,10 @@ export function Toast(_ref) {
     size: IconSize,
     color: IconColor
   }), /*#__PURE__*/React.createElement(Text, theme.notification.toast.text[type] || theme.notification.toast.text["default"], msg)), /*#__PURE__*/React.createElement(Button, {
-    icon: /*#__PURE__*/React.createElement(CloseIcon, null),
+    icon: /*#__PURE__*/React.createElement(CloseIcon, {
+      color: IconColor
+    }),
     onClick: handleClose,
-    color: IconColor,
     style: {
       display: 'flex',
       padding: 0
