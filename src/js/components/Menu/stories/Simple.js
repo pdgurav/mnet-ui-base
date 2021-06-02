@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Box, Menu } from 'mnet-ui-base';
+import { Box, Menu, MnetUIBase } from 'mnet-ui-base';
 
 const SimpleMenu = () => (
-  <>
+  <MnetUIBase>
     <Box align="center" pad="large">
       <Menu
         dropProps={{
@@ -18,7 +18,7 @@ const SimpleMenu = () => (
         ]}
       />
     </Box>
-  </>
+  </MnetUIBase>
 );
 
 export const Simple = () => <SimpleMenu />;

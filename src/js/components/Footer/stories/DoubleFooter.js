@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Anchor, Box, Footer, Main, Text, Icon } from 'mnet-ui-base';
+import { Anchor, Box, Footer, Main, Text } from 'mnet-ui-base';
+import { Grommet as Icon } from 'grommet-icons';
 import { fiveColumns as data } from './data';
 
 const StyledAnchor = styled(Anchor)`

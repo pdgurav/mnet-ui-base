@@ -11,11 +11,16 @@ import {
   focusStyle,
   genericStyles,
   getHoverIndicatorStyle,
+  heightStyle,
   overflowStyle,
   parseMetricToNum,
   responsiveBorderStyle,
-  getBreakpointStyle,
+  widthStyle,
 } from '../../utils';
+
+import { getBreakpointStyle } from '../../utils/responsive';
+
+import { roundStyle } from '../../utils/styles';
 
 const ALIGN_MAP = {
   baseline: 'baseline',
@@ -144,136 +149,6 @@ const WRAP_MAP = {
 const wrapStyle = css`
   flex-wrap: ${props => WRAP_MAP[props.wrapProp]};
 `;
-
-const ROUND_MAP = {
-  full: '100%',
-};
-
-const roundStyle = (data, responsive, theme) => {
-  const breakpoint = getBreakpointStyle(theme, theme.box.responsiveBreakpoint);
-  const styles = [];
-  if (typeof data === 'object') {
-    const size =
-      ROUND_MAP[data.size] ||
-      theme.global.edgeSize[data.size || 'medium'] ||
-      data.size;
-    const responsiveSize =
-      responsive &&
-      breakpoint &&
-      breakpoint.edgeSize[data.size] &&
-      (breakpoint.edgeSize[data.size] || data.size);
-    if (data.corner === 'top') {
-      styles.push(css`
-        border-top-left-radius: ${size};
-        border-top-right-radius: ${size};
-      `);
-      if (responsiveSize) {
-        styles.push(
-          breakpointStyle(
-            breakpoint,
-            `
-          border-top-left-radius: ${responsiveSize};
-          border-top-right-radius: ${responsiveSize};
-        `,
-          ),
-        );
-      }
-    } else if (data.corner === 'bottom') {
-      styles.push(css`
-        border-bottom-left-radius: ${size};
-        border-bottom-right-radius: ${size};
-      `);
-      if (responsiveSize) {
-        styles.push(
-          breakpointStyle(
-            breakpoint,
-            `
-          border-bottom-left-radius: ${responsiveSize};
-          border-bottom-right-radius: ${responsiveSize};
-        `,
-          ),
-        );
-      }
-    } else if (data.corner === 'left') {
-      styles.push(css`
-        border-top-left-radius: ${size};
-        border-bottom-left-radius: ${size};
-      `);
-      if (responsiveSize) {
-        styles.push(
-          breakpointStyle(
-            breakpoint,
-            `
-          border-top-left-radius: ${responsiveSize};
-          border-bottom-left-radius: ${responsiveSize};
-        `,
-          ),
-        );
-      }
-    } else if (data.corner === 'right') {
-      styles.push(css`
-        border-top-right-radius: ${size};
-        border-bottom-right-radius: ${size};
-      `);
-      if (responsiveSize) {
-        styles.push(
-          breakpointStyle(
-            breakpoint,
-            `
-          border-top-right-radius: ${responsiveSize};
-          border-bottom-right-radius: ${responsiveSize};
-        `,
-          ),
-        );
-      }
-    } else if (data.corner) {
-      styles.push(css`
-        border-${data.corner}-radius: ${size};
-      `);
-      if (responsiveSize) {
-        styles.push(
-          breakpointStyle(
-            breakpoint,
-            `
-          border-${data.corner}-radius: ${responsiveSize};
-        `,
-          ),
-        );
-      }
-    } else {
-      styles.push(css`
-        border-radius: ${size};
-      `);
-      if (responsiveSize) {
-        styles.push(
-          breakpointStyle(
-            breakpoint,
-            `
-          border-radius: ${responsiveSize};
-        `,
-          ),
-        );
-      }
-    }
-  } else {
-    const size = data === true ? 'medium' : data;
-    styles.push(css`
-      border-radius: ${ROUND_MAP[size] || theme.global.edgeSize[size] || size};
-    `);
-    const responsiveSize = breakpoint && breakpoint.edgeSize[size];
-    if (responsiveSize) {
-      styles.push(
-        breakpointStyle(
-          breakpoint,
-          `
-        border-radius: ${responsiveSize};
-      `,
-        ),
-      );
-    }
-  }
-  return styles;
-};
 
 const SLIDE_SIZES = {
   xsmall: 1,
@@ -474,47 +349,6 @@ const interactiveStyle = css`
   }
 `;
 
-const getSize = (props, size) => props.theme.global.size[size] || size;
-
-const heightObjectStyle = css`
-  ${props =>
-    props.heightProp.max &&
-    css`
-      max-height: ${getSize(props, props.heightProp.max)};
-    `};
-  ${props =>
-    props.heightProp.min &&
-    css`
-      min-height: ${getSize(props, props.heightProp.min)};
-    `};
-`;
-
-const heightStyle = css`
-  height: ${props => getSize(props, props.heightProp)};
-`;
-
-const widthObjectStyle = css`
-  ${props =>
-    props.widthProp.max &&
-    css`
-      max-width: ${getSize(props, props.widthProp.max)};
-    `};
-  ${props =>
-    props.widthProp.min &&
-    css`
-      min-width: ${getSize(props, props.widthProp.min)};
-    `};
-  ${props =>
-    props.widthProp.width &&
-    css`
-      width: ${getSize(props, props.widthProp.width)};
-    `};
-`;
-
-const widthStyle = css`
-  width: ${props => getSize(props, props.widthProp)};
-`;
-
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
 const StyledBox = styled.div`
   display: flex;
@@ -534,12 +368,8 @@ const StyledBox = styled.div`
       : borderStyle(props.border, props.responsive, props.theme))}
   ${props =>
     props.directionProp && directionStyle(props.directionProp, props.theme)}
-  ${props =>
-    props.heightProp &&
-    (typeof props.heightProp === 'object' ? heightObjectStyle : heightStyle)}
-  ${props =>
-    props.widthProp &&
-    (typeof props.widthProp === 'object' ? widthObjectStyle : widthStyle)}
+  ${props => props.heightProp && heightStyle(props.heightProp, props.theme)}
+  ${props => props.widthProp && widthStyle(props.widthProp, props.theme)}
   ${props => props.flex !== undefined && flexStyle}
   ${props => props.basis && basisStyle}
   ${props => props.fillProp && fillStyle(props.fillProp)}

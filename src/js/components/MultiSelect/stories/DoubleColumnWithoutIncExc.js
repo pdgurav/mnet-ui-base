@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { Box, MultiSelect } from 'mnet-ui-base';
+import { Box, MultiSelect, MnetUIBase } from 'mnet-ui-base';
 
 const options = [
   { id: 1, label: 'Test 1' },
@@ -20,22 +20,24 @@ const Example = () => {
   const [value, setValue] = useState([]);
 
   return (
-    <Box fill align="center" justify="start" pad="large">
-      <MultiSelect
-        options={options}
-        value={value}
-        labelKey="label"
-        valueKey={{ key: 'id', reduce: true }}
-        onValueChange={nextValue => setValue(nextValue)}
-        layout="double-column"
-        width="medium"
-        height="medium"
-        searchPlaceholder="Search"
-        searchable
-        withOptionChips
-        renderEmptySelected={<span>Empty</span>}
-      />
-    </Box>
+    <MnetUIBase>
+      <Box fill align="center" justify="start" pad="large">
+        <MultiSelect
+          options={options}
+          value={value}
+          labelKey="label"
+          valueKey={{ key: 'id', reduce: true }}
+          onValueChange={nextValue => setValue(nextValue)}
+          layout="double-column"
+          width="medium"
+          height="medium"
+          searchPlaceholder="Search"
+          searchable
+          withOptionChips
+          renderEmptySelected={<span>Empty</span>}
+        />
+      </Box>
+    </MnetUIBase>
   );
 };
 

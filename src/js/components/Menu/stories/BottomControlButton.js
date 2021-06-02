@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Box, Menu } from 'mnet-ui-base';
+import { Box, Menu, MnetUIBase, mnet } from 'mnet-ui-base';
 
 const ControlBottomMenu = () => (
-  <div>
+  <MnetUIBase theme={mnet}>
     <Box height="medium" justify="center" align="center" pad="large">
       <Menu
         dropProps={{ align: { bottom: 'bottom', left: 'left' } }}
@@ -15,7 +15,7 @@ const ControlBottomMenu = () => (
         ]}
       />
     </Box>
-  </div>
+  </MnetUIBase>
 );
 
 export const BottomControlButton = () => <ControlBottomMenu />;

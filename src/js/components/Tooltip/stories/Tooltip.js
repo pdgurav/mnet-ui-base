@@ -1,11 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { Box, Button } from 'mnet-ui-base';
+import { Box, Button, MnetUIBase, mnet } from 'mnet-ui-base';
 import { Tooltip } from '../Tooltip';
 
 const TooltipPreview = () => (
-    <div>
+    <MnetUIBase theme={mnet}>
       <Box
         direction="row"
         align="center"
@@ -33,7 +33,7 @@ const TooltipPreview = () => (
           <Button label="Right" />
         </Tooltip>
       </Box>
-    </div>
+    </MnetUIBase>
   );
 
 storiesOf('Tooltip', module).add('Tooltip', () => <TooltipPreview />);

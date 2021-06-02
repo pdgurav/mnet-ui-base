@@ -22,6 +22,9 @@ export const Multiple = () => (
   </MnetUIBase>
 );
 
+Multiple.parameters = {
+};
+
 export default {
   title: 'Input/FileInput/Multiple',
 };

@@ -8,7 +8,10 @@ import React, {
 import styled, { ThemeContext } from 'styled-components';
 import { defaultProps } from '../../default-props';
 
-import { focusStyle, parseMetricToNum } from '../../utils';
+import { containsFocus } from '../../utils/DOM';
+import { focusStyle } from '../../utils/styles';
+import { parseMetricToNum } from '../../utils/mixins';
+import { useForwardedRef } from '../../utils/refs';
 import { Box } from '../Box';
 import { CheckBox } from '../CheckBox';
 import { CheckBoxGroup } from '../CheckBoxGroup';
@@ -18,12 +21,15 @@ import { TextInput } from '../TextInput';
 import { FormContext } from '../Form/FormContext';
 
 const mnetInputNames = [
+  'CheckBox',
+  'CheckBoxGroup',
   'TextInput',
   'Select',
   'MaskedInput',
   'TextArea',
   'DateInput',
   'FileInput',
+  'RadioButtonGroup',
 ];
 const grommetInputPadNames = [
   'CheckBox',
@@ -171,6 +177,7 @@ const FormField = forwardRef(
       validate,
     });
     const [focus, setFocus] = useState();
+    const formFieldRef = useForwardedRef(ref);
 
     const { formField: formFieldTheme } = theme;
     const { border: themeBorder } = formFieldTheme;
@@ -241,6 +248,21 @@ const FormField = forwardRef(
       }
     }
 
+    // fileinput handle
+    // use fileinput plain use formfield to drive the border
+    let isFileInputComponent;
+    if (
+      children &&
+      Children.forEach(children, child => {
+        if (
+          child &&
+          child.type &&
+          'FileInput'.indexOf(child.type.displayName) !== -1
+        )
+          isFileInputComponent = true;
+      })
+    );
+
     if (!themeBorder) {
       contents = (
         <Box {...themeContentProps} {...contentProps}>
@@ -283,17 +305,30 @@ const FormField = forwardRef(
     let abutMargin;
     let outerStyle = style;
 
+    // If fileinput is wrapped in a formfield we want to use
+    // the border style from the fileInput.theme. We also do not
+    // want the foocus around the formfield since the the focus
+    // is on the anchor/button inside fileinput
+
     if (themeBorder) {
       const innerProps =
         themeBorder.position === 'inner'
           ? {
               border: {
                 ...themeBorder,
-                side: themeBorder.side || 'bottom',
+                size: isFileInputComponent
+                  ? theme.fileInput.border.size
+                  : undefined,
+                style: isFileInputComponent
+                  ? theme.fileInput.border.style
+                  : undefined,
+                side: isFileInputComponent
+                  ? theme.fileInput.border.side
+                  : themeBorder.side || 'bottom',
                 color: borderColor,
               },
               round: formFieldTheme.round,
-              focus,
+              focus: isFileInputComponent ? undefined : focus,
             }
           : {};
       contents = (
@@ -381,14 +416,14 @@ const FormField = forwardRef(
 
     return (
       <FormFieldBox
-        ref={ref}
+        ref={formFieldRef}
         className={className}
         background={outerBackground}
         margin={abut ? abutMargin : margin || { ...formFieldTheme.margin }}
         {...outerProps}
         style={outerStyle}
         onFocus={event => {
-          setFocus(true);
+          setFocus(containsFocus(formFieldRef.current));
           if (onFocus) onFocus(event);
         }}
         onBlur={event => {

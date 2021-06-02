@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Box, Calendar, Drop, Heading, TextInput, mnet } from 'mnet-ui-base';
+import { MnetUIBase } from '../../MnetUIBase';
 
 const OverflowDrop = () => {
   const targetRef = useRef();
@@ -18,7 +19,7 @@ const OverflowDrop = () => {
   useEffect(() => setShowDrop(true), []);
 
   return (
-    <div
+    <MnetUIBase
       theme={mnet}
       style={{
         width: '100vw',
@@ -62,7 +63,7 @@ const OverflowDrop = () => {
           </Drop>
         )}
       </Box>
-    </div>
+    </MnetUIBase>
   );
 };
 

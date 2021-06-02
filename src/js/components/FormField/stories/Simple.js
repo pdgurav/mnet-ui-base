@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 
-import { Box, FormField, Select } from 'mnet-ui-base';
-import { allOptions } from './data';
+import { Box, FormField, Select, MnetUIBase, mnet } from 'mnet-ui-base';
+
+const allOptions = Array(100)
+  .fill()
+  .map((_, i) => `option ${i + 1}`);
 
 export const Simple = () => {
   const [value, setValue] = useState('');
 
   return (
-    <>
+    <MnetUIBase theme={mnet}>
       <Box align="center" pad="large">
         <FormField label="Label" htmlFor="select">
           <Select
@@ -19,7 +22,7 @@ export const Simple = () => {
           />
         </FormField>
       </Box>
-    </>
+    </MnetUIBase>
   );
 };
 

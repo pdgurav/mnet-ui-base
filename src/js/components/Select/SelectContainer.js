@@ -272,8 +272,6 @@ const SelectContainer = forwardRef(
     const onKeyDownOption = useCallback(
       event => {
         if (!onSearch) {
-          event.preventDefault();
-
           const nextActiveIndex = options.findIndex((e, index) => {
             let label;
             if (typeof e === 'object') {
@@ -282,12 +280,14 @@ const SelectContainer = forwardRef(
               label = e;
             }
             return (
+              typeof label === 'string' &&
               label.charAt(0).toLowerCase() === event.key.toLowerCase() &&
               !isDisabled(index)
             );
           });
 
           if (nextActiveIndex >= 0) {
+            event.preventDefault();
             setActiveIndex(nextActiveIndex);
             setKeyboardNavigation(true);
           }

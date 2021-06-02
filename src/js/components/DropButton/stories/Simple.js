@@ -2,7 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Close } from 'grommet-icons';
 
-import { Box, Button, DropButton, Heading, Text } from 'mnet-ui-base';
+import {
+  Box,
+  Button,
+  DropButton,
+  Heading,
+  Text,
+  MnetUIBase,
+} from 'mnet-ui-base';
 
 const DropContent = ({ onClose }) => (
   <Box pad="small">
@@ -30,7 +37,7 @@ const SimpleDropButton = () => {
   };
 
   return (
-    <>
+    <MnetUIBase>
       <Box align="center" pad="large">
         <DropButton
           label="Open"
@@ -41,7 +48,7 @@ const SimpleDropButton = () => {
           dropProps={{ align: { top: 'bottom' } }}
         />
       </Box>
-    </>
+    </MnetUIBase>
   );
 };
 

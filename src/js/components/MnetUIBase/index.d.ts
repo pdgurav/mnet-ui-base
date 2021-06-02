@@ -7,14 +7,17 @@ export interface MnetUIBaseProps {
   containerTarget?: HTMLElement;
   cssVars?: boolean;
   dir?: 'rtl';
-  full?: boolean;
+  full?: boolean | 'min';
   plain?: boolean;
   theme?: ThemeType;
   themeMode?: 'dark' | 'light';
   userAgent?: string;
 }
 
-declare const MnetUIBase: React.ComponentClass<MnetUIBaseProps &
-  JSX.IntrinsicElements['div']>;
+export interface MnetUIBaseExtendedProps
+  extends MnetUIBaseProps,
+    Omit<JSX.IntrinsicElements['div'], 'dir'> {}
+
+declare const MnetUIBase: React.FC<MnetUIBaseExtendedProps>;
 
 export { MnetUIBase };

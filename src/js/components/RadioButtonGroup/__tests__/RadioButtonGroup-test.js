@@ -12,10 +12,11 @@ import { RadioButtonGroup } from '..';
 
 describe('RadioButtonGroup', () => {
   afterEach(cleanup);
+
   test('should have no accessibility violations', async () => {
     const { container } = render(
       <MnetUIBase>
-        <RadioButtonGroup name="test" options={[]} />
+        <RadioButtonGroup name="test" options={['option1']} />
       </MnetUIBase>,
     );
 
@@ -101,6 +102,19 @@ describe('RadioButtonGroup', () => {
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
     component.unmount();
+  });
+
+  test('defaultValue', () => {
+    const { container } = render(
+      <MnetUIBase>
+        <RadioButtonGroup
+          name="test"
+          options={['one', 'two']}
+          defaultValue="one"
+        />
+      </MnetUIBase>,
+    );
+    expect(container).toMatchSnapshot();
   });
 
   test('children', () => {

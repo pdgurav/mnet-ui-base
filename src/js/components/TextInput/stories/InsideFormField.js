@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, FormField, TextInput, Form, Button } from 'mnet-ui-base';
-import { allSuggestions } from './data';
 
+const allSuggestions = ['sony', 'sonar', 'foo', 'bar'];
 export const InsideFormField = props => {
   const [state, setState] = useState({
     value: '',

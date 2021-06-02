@@ -22,7 +22,7 @@ export const MultipleValues = () => {
                   setActive(over ? 70 : 0);
                   setLabel(over ? 'in use' : undefined);
                 },
-                onClick: event => {
+                onClick: () => {
                   setHighlight(() => !highlight);
                 },
                 highlight,

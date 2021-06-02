@@ -21,7 +21,6 @@ const theme = deepMerge(mnet, {
       pad: { horizontal: 'small', vertical: 'xsmall' },
       background: tooltipColor,
       border: false,
-      // extend: `color: white;`,
     },
   },
 });

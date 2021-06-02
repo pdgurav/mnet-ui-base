@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import { Box, MultiSelect, Text } from 'mnet-ui-base';
+import { MnetUIBase } from '../../MnetUIBase';
 
 const Example = () => {
   const [value, setValue] = useState([
@@ -36,23 +37,25 @@ const Example = () => {
   };
 
   return (
-    <Box fill align="center" justify="start" pad="large">
-      <MultiSelect
-        value={value}
-        onValueChange={nextValue => setValue(nextValue)}
-        layout="double-column"
-        width="medium"
-        height="large"
-        searchPlaceholder="Search"
-        searchable
-        custom={{ label: 'Enter one domain per line' }}
-        withInclusionExclusion
-        isExcluded={isExcluded}
-        onIncExcChange={nextIncExc => setIncExc(nextIncExc)}
-        renderEmptySelected={<Text>No domains selected</Text>}
-        validate={validateDomains}
-      />
-    </Box>
+    <MnetUIBase>
+      <Box fill align="center" justify="start" pad="large">
+        <MultiSelect
+          value={value}
+          onValueChange={nextValue => setValue(nextValue)}
+          layout="double-column"
+          width="medium"
+          height="large"
+          searchPlaceholder="Search"
+          searchable
+          custom={{ label: 'Enter one domain per line' }}
+          withInclusionExclusion
+          isExcluded={isExcluded}
+          onIncExcChange={nextIncExc => setIncExc(nextIncExc)}
+          renderEmptySelected={<Text>No domains selected</Text>}
+          validate={validateDomains}
+        />
+      </Box>
+    </MnetUIBase>
   );
 };
 

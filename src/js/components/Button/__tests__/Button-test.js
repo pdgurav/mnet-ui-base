@@ -26,6 +26,22 @@ describe('Button', () => {
     expect(results).toHaveNoViolations();
   });
 
+  test('passes through the aria-label prop', async () => {
+    const TEST_LABEL = 'Test Label';
+    const { container, getByText } = render(
+      <Grommet>
+        <Button aria-label={TEST_LABEL} label="Test" onClick={() => {}} />
+      </Grommet>,
+    );
+
+    const button = container.querySelector('button');
+    expect(button.getAttribute('aria-label')).toEqual(TEST_LABEL);
+
+    fireEvent.click(getByText('Test'));
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+
   test('basic', () => {
     const component = renderer.create(
       <MnetUIBase>
@@ -327,7 +343,18 @@ describe('Button', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  test(`disabled state cursor should indicate the button cannot be 
+  test('a11yTitle', () => {
+    const component = renderer.create(
+      <Grommet>
+        <Button a11yTitle="Title" />
+        <Button aria-label="Title" />
+      </Grommet>,
+    );
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  test(`disabled state cursor should indicate the button cannot be
   clicked`, () => {
     const { getByText } = render(
       <MnetUIBase>
@@ -340,5 +367,81 @@ describe('Button', () => {
     const cursorStyle = window.getComputedStyle(button)._values.cursor;
     expect(cursorStyle).not.toBe('pointer');
     expect(cursorStyle).toBe('default');
+  });
+
+  test(`badge should be offset from top-right corner`, () => {
+    const { container } = render(
+      <Grommet>
+        <Button a11yTitle="Button, alert" label="Button" badge />
+      </Grommet>,
+    );
+
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  test(`badge should display number content`, () => {
+    const { container } = render(
+      <Grommet>
+        <Button a11yTitle="Button, 2 unread alerts" label="Button" badge={2} />
+      </Grommet>,
+    );
+
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  test(`badge should display "+" when number is greater than max`, () => {
+    const { container } = render(
+      <Grommet>
+        <Button
+          a11yTitle="Button, 100 unread alerts"
+          label="Button"
+          badge={{ value: 100, max: 9 }}
+        />
+      </Grommet>,
+    );
+
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  test(`badge should apply background`, () => {
+    const { container } = render(
+      <Grommet>
+        <Button
+          a11yTitle="Button, 100 unread alerts"
+          label="Button"
+          badge={{
+            background: 'status-ok',
+            value: 100,
+          }}
+        />
+      </Grommet>,
+    );
+
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  test(`badge should render custom element`, () => {
+    const { container } = render(
+      <Grommet>
+        <Button
+          a11yTitle="Button, Add user alert"
+          label="Button"
+          badge={<Add />}
+        />
+      </Grommet>,
+    );
+
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  test(`badge should render relative to contents when button has no 
+  border or background`, () => {
+    const { container } = render(
+      <Grommet>
+        <Button a11yTitle="Button, Add user alert" icon={<Add />} badge />
+      </Grommet>,
+    );
+
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

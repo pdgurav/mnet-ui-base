@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { Box, Select } from 'mnet-ui-base';
+import { Box, Select, MnetUIBase, mnet } from 'mnet-ui-base';
 
 // the prefix name of the Create option entry
 const prefix = 'Create';
@@ -38,32 +38,34 @@ const CreateOption = () => {
   const [searchValue, setSearchValue] = useState('');
 
   return (
-    <div style={{ width: '100vw', height: '100vh', overflow: 'auto' }}>
-      <Box fill align="center" justify="start" pad="large">
-        <Select
-          size="medium"
-          placeholder="Select"
-          value={value}
-          options={options}
-          onChange={({ option }) => {
-            if (option.includes(prefix)) {
-              defaultOptions.pop(); // remove Create option
-              defaultOptions.push(searchValue);
-              setValue(searchValue);
-            } else {
-              setValue(option);
-            }
-          }}
-          onClose={() => setOptions(defaultOptions)}
-          onSearch={text => {
-            updateCreateOption(text);
-            const exp = getRegExp(text);
-            setOptions(defaultOptions.filter(o => exp.test(o)));
-            setSearchValue(text);
-          }}
-        />
-      </Box>
-    </div>
+    <MnetUIBase theme={mnet}>
+      <div style={{ width: '100vw', height: '100vh', overflow: 'auto' }}>
+        <Box fill align="center" justify="start" pad="large">
+          <Select
+            size="medium"
+            placeholder="Select"
+            value={value}
+            options={options}
+            onChange={({ option }) => {
+              if (option.includes(prefix)) {
+                defaultOptions.pop(); // remove Create option
+                defaultOptions.push(searchValue);
+                setValue(searchValue);
+              } else {
+                setValue(option);
+              }
+            }}
+            onClose={() => setOptions(defaultOptions)}
+            onSearch={text => {
+              updateCreateOption(text);
+              const exp = getRegExp(text);
+              setOptions(defaultOptions.filter(o => exp.test(o)));
+              setSearchValue(text);
+            }}
+          />
+        </Box>
+      </div>
+    </MnetUIBase>
   );
 };
 

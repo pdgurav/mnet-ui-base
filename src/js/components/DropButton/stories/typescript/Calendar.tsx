@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { FormDown } from 'grommet-icons';
 
-import { Box, Calendar, DropButton, Text } from 'mnet-ui-base';
+import { 
+  Box,
+  Calendar,
+  DropButton,
+  Text,
+  MnetUIBase,
+  mnet,
+} from 'mnet-ui-base';
 
 const CalendarDropButton = () => {
   const [date, setDate] = useState('');
@@ -13,7 +20,7 @@ const CalendarDropButton = () => {
   };
 
   return (
-    <>
+    <MnetUIBase theme={mnet}>
       <Box align="center" pad="large">
         <DropButton
           open={open}
@@ -29,7 +36,7 @@ const CalendarDropButton = () => {
           </Box>
         </DropButton>
       </Box>
-    </>
+    </MnetUIBase>
   );
 };
 

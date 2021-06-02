@@ -193,3 +193,57 @@ export const patternPropType = PropTypes.oneOf([
   'stripesDiagonalDown',
   'stripesDiagonalUp',
 ]);
+
+export const roundPropType = PropTypes.oneOfType([
+  PropTypes.bool,
+  PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', 'full']),
+  PropTypes.string,
+  PropTypes.shape({
+    corner: PropTypes.oneOf([
+      'top',
+      'left',
+      'bottom',
+      'right',
+      'top-left',
+      'top-right',
+      'bottom-left',
+      'bottom-right',
+    ]),
+    size: PropTypes.oneOfType([
+      PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge']),
+      PropTypes.string,
+    ]),
+  }),
+])
+  .description('How much to round the corners.')
+  .defaultValue(undefined);
+
+const dimSizeType = PropTypes.oneOf([
+  'xxsmall',
+  'xsmall',
+  'small',
+  'medium',
+  'large',
+  'xlarge',
+  'xxlarge',
+]);
+
+export const heightPropType = PropTypes.oneOfType([
+  dimSizeType,
+  PropTypes.string,
+  PropTypes.shape({
+    height: PropTypes.oneOfType([dimSizeType, PropTypes.string]),
+    min: PropTypes.oneOfType([dimSizeType, PropTypes.string]),
+    max: PropTypes.oneOfType([dimSizeType, PropTypes.string]),
+  }),
+]);
+
+export const widthPropType = PropTypes.oneOfType([
+  dimSizeType,
+  PropTypes.string,
+  PropTypes.shape({
+    width: PropTypes.oneOfType([dimSizeType, PropTypes.string]),
+    min: PropTypes.oneOfType([dimSizeType, PropTypes.string]),
+    max: PropTypes.oneOfType([dimSizeType, PropTypes.string]),
+  }),
+]);

@@ -1,5 +1,3 @@
-import { rgba } from 'polished';
-
 import { Actions } from 'grommet-icons/icons/Actions';
 import { ClosedCaption } from 'grommet-icons/icons/ClosedCaption';
 import { Expand } from 'grommet-icons/icons/Expand';
@@ -16,6 +14,8 @@ import { Subtract } from 'grommet-icons/icons/Subtract';
 import { Volume } from 'grommet-icons/icons/Volume';
 import { VolumeLow } from 'grommet-icons/icons/VolumeLow';
 import { base as iconBase } from 'grommet-icons/themes/base';
+import { Select as Success }  from 'grommet-icons/icons/Select';
+import { Split as Block }  from 'grommet-icons/icons/Split';
 
 import { deepFreeze, deepMerge } from '../utils/object';
 import { parseMetricToNum } from '../utils/mixins';
@@ -50,7 +50,7 @@ const lightColors = [
 const focusColor = '#B1C2FE';
 
 const colors = {
-  active: rgba(221, 221, 221, 0.5),
+  active: 'rgba(221, 221, 221, 0.5)',
   'background-back': {
     dark: '#33333308',
     light: '#EDEDED',
@@ -67,8 +67,8 @@ const colors = {
   'active-text': 'text-strong',
   black: '#000000',
   border: {
-    dark: rgba(255, 255, 255, 0.33),
-    light: rgba(205, 211, 227, 1),
+    dark: 'rgba(255, 255, 255, 0.33)',
+    light: 'rgba(205, 211, 227, 1)',
   },
   brand: brandColor,
   control: {
@@ -218,6 +218,7 @@ export const generate = (baseSpacing = 24, scale = 6) => {
       // The time to wait after the user stopped typing, measured in ms.
       debounceDelay: 300,
       drop: {
+        // intelligentMargin: undefined,
         background: {
           dark: 'black',
           light: 'white',
@@ -225,7 +226,8 @@ export const generate = (baseSpacing = 24, scale = 6) => {
         border: {
           radius: '0px',
         },
-        shadowSize: 'small',
+        // margin: undefined
+        shadowSize: 'small', // shadowSize is deprecated, use 'elevation'
         zIndex: '20',
         marginTop: '4px',
       },
@@ -367,13 +369,28 @@ export const generate = (baseSpacing = 24, scale = 6) => {
     avatar: {
       // extend: undefined,
       size: {
-        xsmall: `${baseSpacing * 0.75}px`,
-        small: `${baseSpacing}px`,
-        medium: `${baseSpacing * 2}px`, // default 48
-        large: `${baseSpacing * 3}px`,
-        xlarge: `${baseSpacing * 4}px`,
+        xsmall: `${baseSpacing * 0.75}px`, // 18px
+        small: `${baseSpacing}px`, // 24px
+        medium: `${baseSpacing * 2}px`, // default 48px
+        large: `${baseSpacing * 3}px`, // 72px
+        xlarge: `${baseSpacing * 4}px`, // 96px
+        '2xl': `${baseSpacing * 5}px`, // 120px
+        '3xl': `${baseSpacing * 6}px`, // 144px
+        '4xl': `${baseSpacing * 7}px`, // 168px
+        '5xl': `${baseSpacing * 8}px`, // 192px
       },
       text: {
+        size: {
+          xsmall: 'small', // 14px
+          small: 'medium', // 18px
+          medium: 'large', // 22px
+          large: 'xlarge', // 26px
+          xlarge: 'xxlarge', // 34px
+          '2xl': '3xl', // 42px
+          '3xl': '4xl', // 54px
+          '4xl': '5xl', // 70px
+          '5xl': '6xl', // 90px
+        },
         // fontWeight: undefined,
         // extend: undefined
       },
@@ -383,6 +400,21 @@ export const generate = (baseSpacing = 24, scale = 6) => {
       // extend: undefined,
     },
     button: {
+      badge: {
+        container: {
+          background: 'brand',
+          // pad: undefined,
+          // extend: undefined,
+        },
+        size: {
+          medium: `${baseSpacing}px`, // 24px
+        },
+        text: {
+          size: {
+            medium: 'small', // 14px
+          },
+        },
+      },
       size: {
         small: {
           border: {
@@ -577,6 +609,9 @@ export const generate = (baseSpacing = 24, scale = 6) => {
         radius: '4px',
         thickness: '4px',
       },
+      label: {
+        align: 'center',
+      },
       // color: { dark: undefined, light: undefined },
       // extend: undefined,
       // gap: undefined
@@ -587,6 +622,7 @@ export const generate = (baseSpacing = 24, scale = 6) => {
             light: 'black',
           },
         },
+        // background: undefined,
       },
       icon: {
         // size: undefined,
@@ -596,6 +632,7 @@ export const generate = (baseSpacing = 24, scale = 6) => {
         // checked: undefined,
         // indeterminate: undefined,
       },
+      // pad: undefined,
       size: `${baseSpacing}px`,
       toggle: {
         // background: undefined
@@ -967,6 +1004,10 @@ export const generate = (baseSpacing = 24, scale = 6) => {
         pad: { horizontal: 'medium', vertical: 'small' },
         // extend: undefined,
       },
+      icons: {
+        down: FormDown,
+        up: FormUp,
+      },
       // extend: undefined,
     },
     maskedInput: {
@@ -996,6 +1037,254 @@ export const generate = (baseSpacing = 24, scale = 6) => {
       color: 'graph-0',
       // colors: [] || colors: ['graph-0', 'graph-1', 'graph-2', 'graph-3'],
       // extend: undefined,
+    },
+    multiselect: {
+      container: {
+        border: {
+          color: 'light-3',
+        },
+        round: 'small',
+      },
+      option: {
+        width: 'full',
+        direction: 'row',
+        justify: 'between',
+        pad: { horizontal: 'medium' },
+      },
+      includeBtn: {
+        color: 'status-ok',
+      },
+      excludeBtn: {
+        color: 'status-error',
+      },
+      checkbox: {
+        box: {
+          margin: {
+            right: 'medium',
+            // extend: undefined,
+          },
+        },
+        checkmark: {
+          size: `${baseSpacing * 1.2}px`,
+          color: 'white',
+        },
+        type: 'add',
+        check: {
+          height: `${baseSpacing * 1.2}px`,
+          width: `${baseSpacing * 1.2}px`,
+          margin: 'auto',
+          round: 'small',
+          align: 'center',
+          background: 'white',
+          border: { color: 'light-6' },
+          extend: props => {
+            const getBackground = () => {
+              switch (props.isExcluded) {
+                case null:
+                  return accentColors[2];
+                case false:
+                  return '#38C18B';
+                case true:
+                  return '#FC564F';
+                default:
+                  return accentColors[2];
+              }
+            };
+            return {
+              background: props.active ? getBackground() : 'white',
+              'border-color': props.active ? 'transparent' : lightColors[5],
+            };
+          },
+        },
+      },
+      chips: {
+        wrapper: {
+          pad: { vertical: 'medium', left: 'medium', right: 'small' },
+          direction: 'row',
+          extend: props => ({
+            'border-bottom': props.twoColumnLayout
+              ? 'none'
+              : '1px solid #D9DBE5',
+          }),
+        },
+        option: {
+          background: 'light-3',
+          round: 'small',
+          pad: {
+            vertical: 'medium',
+            horizontal: 'medium',
+          },
+          margin: 'small',
+          direction: 'row',
+          align: 'center',
+          extend: props => ({
+            width: props.twoColumnLayout ? '100%' : 'auto',
+            margin: props.twoColumnLayout
+              ? 0
+              : `${baseSpacing / (1.618 * 2)}px`,
+            background: props.twoColumnLayout ? 'white' : lightColors[2],
+            'justify-content': props.twoColumnLayout
+              ? 'space-between'
+              : 'flex-start',
+          }),
+        },
+        label: {
+          color: 'dark-1',
+          size: 'medium',
+          weight: 400,
+          margin: {
+            right: 'small',
+          },
+        },
+        icon: {
+          size: 'small',
+          color: 'dark-3',
+        },
+        clear: {
+          margin: 'medium',
+          border: {
+            side: 'top',
+            color: 'light-3',
+          },
+          color: 'dark-1',
+          size: 'medium',
+          alignSelf: 'end',
+          weight: '600',
+          height: '30px',
+        },
+      },
+      controls: {
+        wrapper: {
+          pad: 'medium',
+          direction: 'row',
+          height: {
+            min: 'auto',
+          },
+          // extend: undefined,
+        },
+        button: {
+          margin: 'small',
+        },
+      },
+      searchbox: {
+        textWrapper: {
+          flex: 'grow',
+        },
+        iconWrapper: {
+          gap: 'medium',
+          width: 'xxsmall',
+          direction: 'row',
+          justify: 'center',
+        },
+        container: {
+          height: '40px',
+          direction: 'row',
+          align: 'center',
+          background: 'transparent',
+          // pad: { horizontal: 'medium', vertical: 'medium' },
+          pad: 'none',
+          border: {
+            side: 'bottom',
+            color: 'light-3',
+          },
+          style: {
+            minHeight: '40px',
+          },
+          position: 'relative',
+        },
+        placeholder: {
+          color: 'dark-4',
+          size: 'medium',
+        },
+        icon: {
+          size: 'small',
+          color: 'dark-3',
+        },
+      },
+      rightPanel: {
+        border: 'light-3',
+        incExcHeader: {
+          box: {
+            direction: 'row',
+            justify: 'between',
+            align: 'center',
+            pad: 'large',
+            background: 'white',
+            border: {
+              side: 'bottom',
+              color: 'light-3',
+            },
+          },
+          text: {
+            color: 'dark-1',
+            size: 'medium',
+            weight: '400',
+          },
+          count: {
+            margin: { left: 'small' },
+            background: statusColors.info,
+            round: 'medium',
+            pad: { horizontal: 'medium' },
+            justify: 'center',
+          },
+        },
+      },
+      label: undefined,
+      custom: {
+        wrapper: {
+          direction: 'row',
+          border: {
+            color: 'light-3',
+          },
+          round: 'small',
+        },
+        textAreaWrap: {
+          border: {
+            side: 'right',
+            color: 'transparent',
+          },
+          pad: '0',
+          height: '100%',
+          extend: {
+            '*': {
+              // border: 'none',
+              // height: '100%',
+            },
+          },
+        },
+        actions: {
+          wrapper: {
+            direction: 'row',
+            gap: '0',
+            margin: '0',
+            justify: 'evenly',
+            align: 'center',
+            border: {
+              side: 'top',
+              color: 'light-3',
+            },
+            height: {
+              min: '30px',
+            },
+          },
+        },
+      },
+      icons: {
+        include: {
+          icon: Success,
+          extend: {
+            color: 'status-ok',
+            size: 'small',
+          },
+        },
+        exclude: {
+          icon: Block,
+          extend: {
+            color: 'status-error',
+            size: 'small',
+          },
+        },
+      },      
     },
     pagination: {
       button: {
@@ -1480,6 +1769,9 @@ export const generate = (baseSpacing = 24, scale = 6) => {
       drop: {
         // any props for the drop
         align: { top: 'bottom' }, // most common use case is Header with Buttons
+        background: 'none',
+        elevation: 'none',
+        margin: 'none',
       },
     },
     video: {
@@ -1508,6 +1800,20 @@ export const generate = (baseSpacing = 24, scale = 6) => {
       tipSize: '5px',
       round: 'small',
       maxWidth: '20%',
+    },
+    worldMap: {
+      color: 'light-3',
+      continent: {
+        active: '8px',
+        base: '6px',
+      },
+      hover: {
+        color: 'light-4',
+      },
+      place: {
+        active: '20px',
+        base: '8px',
+      },
     },
   });
 

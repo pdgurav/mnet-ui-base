@@ -156,7 +156,26 @@ exports[`MnetUIBase full 1`] = `
 </div>
 `;
 
-exports[`MnetUIBase mnet theme 1`] = `
+exports[`Grommet full min 1`] = `
+.c0 {
+  font-size: 18px;
+  line-height: 24px;
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+<div
+  className="c0"
+>
+  Grommet App
+</div>
+`;
+
+exports[`Grommet grommet theme 1`] = `
 .c0 {
   font-family: 'Open Sans',Arial,sans-serif;
   font-size: 12px;

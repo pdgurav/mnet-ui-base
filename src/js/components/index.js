@@ -67,3 +67,7 @@ export * from './Text';
 export * from './TextArea';
 export * from './TextInput';
 export * from './Tip';
+export * from './Chart';
+export * from './WorldMap';
+export * from './Video';
+

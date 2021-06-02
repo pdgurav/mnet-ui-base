@@ -11,7 +11,7 @@ import { applyKey } from './utils';
 const MultiSelect = ({
   width,
   height,
-  options,
+  options = [],
   value: valueProp,
   labelKey,
   valueKey,

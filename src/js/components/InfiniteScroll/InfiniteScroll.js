@@ -1,10 +1,5 @@
-import React, {
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useLayoutEffect } from '../../utils/use-isomorphic-layout-effect';
 import {
   findScrollParent,
   findScrollParents,
@@ -22,11 +17,11 @@ const InfiniteScroll = ({
   onMore,
   renderMarker,
   replace,
-  show: showProp,
+  show,
   step = 50,
 }) => {
   // item index to be made visible initially
-  const [show, setShow] = useState(showProp);
+  const [scrollShow, setScrollShow] = useState();
 
   // the last page we have items for
   const lastPage = useMemo(() => Math.floor(items.length / step), [
@@ -151,18 +146,18 @@ const InfiniteScroll = ({
   }, [items.length, lastPage, onMore, pendingLength, renderPageBounds, step]);
 
   useEffect(() => {
-    if (lastPage === 0 && pendingLength !== 0) {
+    if (items.length === 0 && lastPage === 0 && pendingLength !== 0) {
       setPageHeights([]);
       setPendingLength(0);
       setRenderPageBounds([0, calculateLastPageBound(show, step)]);
     }
-  }, [lastPage, pendingLength, show, step]);
+  }, [lastPage, pendingLength, show, step, items.length]);
 
   // scroll to any 'show'
   useLayoutEffect(() => {
     // ride out any animation delays, 100ms empirically measured
     const timer = setTimeout(() => {
-      if (show && belowMarkerRef.current) {
+      if (show && belowMarkerRef.current && show !== scrollShow) {
         // calculate show index based on beginPage
         const showIndex =
           show - renderPageBounds[0] * step + (renderPageBounds[0] ? 1 : 0);
@@ -177,7 +172,7 @@ const InfiniteScroll = ({
             showNode.scrollIntoView(false);
           }
           // clean up after having shown
-          setShow(undefined);
+          setScrollShow(show);
         }
       }
     }, 100);

@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Anchor, Box, Header, Nav } from 'mnet-ui-base';
-import { Avatar } from '../../Header/stories/Simple';
+import { Anchor, Box, Header, Nav, Avatar } from 'mnet-ui-base';
 
 const items = [
   { label: 'HTML', href: '#' },

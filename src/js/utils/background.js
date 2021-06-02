@@ -180,8 +180,6 @@ export const backgroundStyle = (backgroundArg, theme, textColorArg) => {
       ${textColor ? `color: ${textColor};` : ''}
     `;
   }
-  // if textArg is false, we don't want the textColor, used for Button hover
-  if (textArg === false) textColor = undefined;
 
   if (typeof background === 'string')
     // This case takes care of gradients

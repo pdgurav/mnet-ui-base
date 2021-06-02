@@ -71,8 +71,8 @@ const RangeSelector = forwardRef(
       [direction, max, min, step],
     );
 
-    useEffect(() => {
-      const mouseMove = event => {
+    const onMouseMove = useCallback(
+      event => {
         const value = valueForMouseCoord(event);
         let nextValues;
         if (changing === 'lower' && value <= values[1] && value !== moveValue) {
@@ -99,22 +99,33 @@ const RangeSelector = forwardRef(
           setMoveValue(value);
           onChange(nextValues);
         }
-      };
+      },
+      [
+        values,
+        changing,
+        moveValue,
+        max,
+        min,
+        setMoveValue,
+        onChange,
+        valueForMouseCoord,
+      ],
+    );
 
-      const mouseUp = () => setChanging(undefined);
+    useEffect(() => {
+      const onMouseUp = () => setChanging(undefined);
 
       if (changing) {
-        window.addEventListener('mousemove', mouseMove);
-        window.addEventListener('mouseup', mouseUp);
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
 
         return () => {
-          window.removeEventListener('mousemove', mouseMove);
-          window.removeEventListener('mouseup', mouseUp);
+          window.removeEventListener('mousemove', onMouseMove);
+          window.removeEventListener('mouseup', onMouseUp);
         };
       }
       return undefined;
-    }, [changing, max, min, moveValue, onChange, valueForMouseCoord, values]);
-    
+    }, [changing, onMouseMove]);
 
     const onClick = useCallback(
       event => {
@@ -136,9 +147,13 @@ const RangeSelector = forwardRef(
       [lastChange, onChange, valueForMouseCoord, values],
     );
 
-    if (!theme) {
-      return null;
-    }
+    const onTouchMove = useCallback(
+      event => {
+        const touchEvent = event.changedTouches[0];
+        onMouseMove(touchEvent);
+      },
+      [onMouseMove],
+    );
 
     const [lower, upper] = values;
     // It needs to be true when vertical, due to how browsers manage height
@@ -161,6 +176,7 @@ const RangeSelector = forwardRef(
         {...rest}
         tabIndex="-1"
         onClick={onChange ? onClick : undefined}
+        onTouchMove={onChange ? onTouchMove : undefined}
       >
         <Box
           style={{ flex: `${lower - min} 0 0` }}
@@ -186,6 +202,7 @@ const RangeSelector = forwardRef(
           thickness={thickness}
           edge="lower"
           onMouseDown={onChange ? () => setChanging('lower') : undefined}
+          onTouchStart={onChange ? () => setChanging('lower') : undefined}
           onDecrease={
             onChange && lower - step >= min
               ? () => onChange([lower - step, upper])
@@ -228,6 +245,7 @@ const RangeSelector = forwardRef(
           thickness={thickness}
           edge="upper"
           onMouseDown={onChange ? () => setChanging('upper') : undefined}
+          onTouchStart={onChange ? () => setChanging('upper') : undefined}
           onDecrease={
             onChange && upper - step >= lower
               ? () => onChange([lower, upper - step])

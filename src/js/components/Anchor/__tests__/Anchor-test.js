@@ -1,10 +1,6 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import 'jest-styled-components';
-
-import { findAllByType } from '../../../utils';
-
 import { MnetUIBase } from '../../MnetUIBase';
 import { Anchor } from '..';
 
@@ -12,28 +8,26 @@ describe('Anchor', () => {
   afterEach(cleanup);
 
   test('renders', () => {
-    const component = renderer.create(
+    const { container } = render(
       <MnetUIBase>
         <Anchor />
       </MnetUIBase>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 
   test('renders with children', () => {
-    const component = renderer.create(
+    const { container } = render(
       <MnetUIBase>
         <Anchor href="#">children</Anchor>
       </MnetUIBase>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   test('warns about invalid label render', () => {
     const warnSpy = jest.spyOn(console, 'warn');
-    const component = renderer.create(
+    const component = render.create(
       <MnetUIBase>
         <Anchor href="#" label="Test">
           invalid
@@ -52,7 +46,7 @@ describe('Anchor', () => {
 
   test('warns about invalid icon render', () => {
     const warnSpy = jest.spyOn(console, 'warn');
-    const component = renderer.create(
+    const component = render.create(
       <MnetUIBase>
         <Anchor href="#" icon={<svg />}>
           invalid
@@ -70,13 +64,12 @@ describe('Anchor', () => {
   });
 
   test('primary renders', () => {
-    const component = renderer.create(
+    const { container } = render(
       <MnetUIBase>
         <Anchor href="#" primary label="Test" />
       </MnetUIBase>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 
   test('focus renders', () => {
@@ -90,56 +83,77 @@ describe('Anchor', () => {
   });
 
   test('disabled renders', () => {
-    const component = renderer.create(
+    const { container } = render(
       <MnetUIBase>
         <Anchor disabled />
       </MnetUIBase>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 
   test('icon label renders', () => {
-    const component = renderer.create(
+    const { container } = render(
       <MnetUIBase>
         <Anchor icon={<svg />} label="Test" onClick={() => {}} />
       </MnetUIBase>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 
   test('reverse icon label renders', () => {
-    const component = renderer.create(
+    const { container } = render(
       <MnetUIBase>
         <Anchor reverse icon={<svg />} label="Test" onClick={() => {}} />
       </MnetUIBase>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
+  });
+
+  test('size renders', () => {
+    const { container } = render(
+      <MnetUIBase>
+        <Anchor size="xsmall" />
+        <Anchor size="small" />
+        <Anchor size="medium" />
+        <Anchor size="large" />
+        <Anchor size="xlarge" />
+        <Anchor size="xxlarge" />
+        <Anchor size="10px" />
+      </MnetUIBase>,
+    );
+    expect(container).toMatchSnapshot();
   });
 
   test('is clickable', () => {
     const onClick = jest.fn();
-    const component = renderer.create(
+    const { container, getByText } = render(
       <MnetUIBase>
         <Anchor href="#" label="Test" onClick={onClick} />
       </MnetUIBase>,
     );
-    const tree = component.toJSON();
-
-    const anchor = findAllByType(tree, 'a');
-    anchor[0].props.onClick();
+    const anchor = getByText('Test');
+    fireEvent.click(anchor);
+    expect(container.firstChild).toMatchSnapshot();
     expect(onClick).toBeCalled();
   });
 
   test('renders tag', () => {
-    const component = renderer.create(
+    const { container } = render(
       <MnetUIBase>
         <Anchor href="#" label="Test" as="span" />
       </MnetUIBase>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
+  });
+
+  test('weight renders', () => {
+    const { container } = render(
+      <MnetUIBase>
+        <Anchor href="#" label="Normal" weight="normal" />
+        <Anchor href="#" label="Bold" weight="bold" />
+        <Anchor href="#" label="Bold" weight={500} />
+      </MnetUIBase>,
+    );
+    expect(container).toMatchSnapshot();
   });
 });

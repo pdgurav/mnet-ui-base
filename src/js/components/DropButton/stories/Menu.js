@@ -2,6 +2,7 @@ import React from 'react';
 import { Gremlin } from 'grommet-icons';
 
 import { Box, DropButton, Text } from 'mnet-ui-base';
+import { MnetUIBase } from '../../MnetUIBase';
 
 const renderItems = () => (
   <Box>
@@ -30,7 +31,7 @@ const GremlinDropButton = () => (
 );
 
 const MenuDropButton = () => (
-  <div style={{ width: '100vw', height: '100vh', overflow: 'auto' }}>
+  <MnetUIBase style={{ width: '100vw', height: '100vh', overflow: 'auto' }}>
     <Box fill>
       <Box fill="vertical" width="xxsmall" background="dark-2">
         <GremlinDropButton />
@@ -38,7 +39,7 @@ const MenuDropButton = () => (
         <GremlinDropButton />
       </Box>
     </Box>
-  </div>
+  </MnetUIBase>
 );
 
 export const Menu = () => <MenuDropButton />;

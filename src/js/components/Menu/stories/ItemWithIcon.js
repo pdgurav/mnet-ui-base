@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { Box, Menu, Text } from 'mnet-ui-base';
+import { Box, Menu, Text, MnetUIBase } from 'mnet-ui-base';
 import { FormDown, Github, Slack } from 'grommet-icons';
 
 // This story offers a suggested workaround for issue #3209.
 
 const IconItemsMenu = () => (
-  <>
+  <MnetUIBase>
     <Box align="center" pad="large">
       <Menu
         plain
@@ -38,7 +38,7 @@ const IconItemsMenu = () => (
         </Box>
       </Menu>
     </Box>
-  </>
+  </MnetUIBase>
 );
 
 export const ItemWithIcon = () => <IconItemsMenu />;

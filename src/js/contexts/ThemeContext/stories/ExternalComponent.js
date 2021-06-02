@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Text, ThemeContext } from 'mnet-ui-base';
+import { Box, Text, ThemeContext, mnet } from 'mnet-ui-base';
 
 export const ExternalComponentWithTheme = () => (
   <>
@@ -8,7 +8,7 @@ export const ExternalComponentWithTheme = () => (
       <Text color="light-1">This is a grommet component</Text>
     </Box>
     <ThemeContext.Consumer>
-      {theme => (
+      {(theme = mnet) => (
         <div style={{ backgroundColor: theme.global.colors['neutral-3'] }}>
           <p style={{ color: theme.global.colors['light-1'] }}>
             This component is leveraging the grommet theme capabilities although

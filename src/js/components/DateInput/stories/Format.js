@@ -14,7 +14,7 @@ export const Format = () => {
     <MnetUIBase theme={mnet}>
       <Box align="center" pad="large">
         <Box width="medium">
-          <DateInput format="mm/dd/yyyy" value={value} onChange={onChange} />
+          <DateInput format="m/d/yy" value={value} onChange={onChange} />
         </Box>
       </Box>
     </MnetUIBase>

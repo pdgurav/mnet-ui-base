@@ -2,7 +2,7 @@ import React from 'react';
 
 import { MnetUIBase, Header, Anchor, Box, ResponsiveContext, 
   Menu } from 'mnet-ui-base';
-import { MnetUIBase as MnetUIBaseIcon, Menu as MenuIcon } from 'grommet-icons';
+import { Grommet as MnetUIBaseIcon, Menu as MenuIcon } from 'grommet-icons';
 import { mnet } from 'mnet-ui-base/themes';
 
 export const Responsive = () => (

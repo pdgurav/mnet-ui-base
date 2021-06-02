@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Box, Button, MnetUIBase, Form, FormField } from 'mnet-ui-base';
+import { Box, Button, MnetUIBase, Form, FormField, Select } from 'mnet-ui-base';
 import { mnet } from 'mnet-ui-base/themes';
 
 export const ValidateOnChange = () => {
@@ -46,7 +46,24 @@ export const ValidateOnChange = () => {
                 },
               ]}
             />
-
+            <FormField
+              label="Size"
+              name="select-size"
+              htmlFor="select-size"
+              required
+              validate={val => {
+                if (val === 'small') {
+                  return { message: 'Only 10 left in stock!', status: 'info' };
+                }
+                return undefined;
+              }}
+            >
+              <Select
+                name="select-size"
+                id="select-size"
+                options={['small', 'medium', 'large']}
+              />
+            </FormField>
             <Box direction="row" justify="between" margin={{ top: 'medium' }}>
               <Button label="Cancel" />
               <Button type="reset" label="Reset" />

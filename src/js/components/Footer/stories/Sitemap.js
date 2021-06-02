@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MnetUIBase as MnetUIBaseIcon } from 'grommet-icons';
+import { Grommet as Icon } from 'grommet-icons';
 import { Anchor, Box, Footer, Main, Text } from 'mnet-ui-base';
 import { threeColumns as data } from './data';
 
@@ -33,7 +33,7 @@ export const Sitemap = () => (
     <Footer background="dark-1" pad="large">
       <Box direction="row-responsive" gap="xsmall">
         <Box align="center" gap="small">
-          <MnetUIBaseIcon color="brand" size="large" />
+          <Icon color="brand" size="large" />
           <Text alignSelf="center" color="brand" weight="bold">
             grommet.io
           </Text>

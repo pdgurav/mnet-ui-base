@@ -77,7 +77,7 @@ const SelectedList = ({
             {filteredItems.length ? (
               filteredItems.map((item, id) => (
                 <OptionText
-                  {/* eslint-disable-next-line react/no-array-index-key */}
+                  /* eslint-disable-next-line react/no-array-index-key */
                   key={`${id}-${item}`}
                   twoColumnLayout={layout === 'double-column'}
                   {...theme.multiselect.chips.option}

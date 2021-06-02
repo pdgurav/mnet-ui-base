@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import { Box, MnetUIBase, MultiSelect } from 'mnet-ui-base';
-import { neo as mnet } from 'mnet-ui-base/themes/neo';
 
 const Example = () => {
   const [value, setValue] = useState({
@@ -11,7 +10,7 @@ const Example = () => {
   });
 
   return (
-    <MnetUIBase full theme={mnet}>
+    <MnetUIBase>
       <Box fill align="center" justify="start" pad="large">
         <MultiSelect
           value={value}

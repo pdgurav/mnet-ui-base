@@ -757,12 +757,6 @@ const responsiveContainerStyle = props => css`
   max-height: none;
   max-width: none;
   border-radius: 0;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transform: none;
-  animation: none;
   height: ${!props.layerTarget ? '100vh' : '100%'};
   width: ${!props.layerTarget ? '100vw' : '100%'};
 `;
@@ -774,7 +768,12 @@ const elevationStyle = css`
     ]};
 `;
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.div.withConfig({
+  // don't let elevation leak to DOM
+  // https://styled-components.com/docs/api#shouldforwardprop
+  shouldForwardProp: (prop, defaultValidatorFn) =>
+    !['elevation'].includes(prop) && defaultValidatorFn(prop),
+})`
   ${props => (!props.modal ? baseStyle : '')}
   display: flex;
   flex-direction: column;
@@ -788,7 +787,8 @@ const StyledContainer = styled.div`
     )} outline: none;
   pointer-events: all;
   z-index: ${props => props.theme.layer.container.zIndex};
-  ${props => props.theme.layer.container.elevation && elevationStyle}
+  ${props =>
+    !props.plain && props.theme.layer.container.elevation && elevationStyle}
   ${desktopContainerStyle}
   ${props => {
     if (props.responsive && props.theme.layer.responsiveBreakpoint) {

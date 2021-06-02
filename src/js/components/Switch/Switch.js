@@ -25,7 +25,7 @@ const Switch = ({ value, options, onValueChange, disabled, ...rest }) => {
       />
     </MnetUIBase>
   );
-}
+};
 
 Switch.displayName = 'Switch';
 

@@ -11,6 +11,8 @@ import {
   Select,
   TextArea,
   TextInput,
+  mnet,
+  MnetUIBase,
 } from 'mnet-ui-base';
 
 const suggestions = ['alpha', 'beta'];
@@ -24,69 +26,71 @@ export const FormLayer = () => {
   const onClose = () => setOpen(undefined);
 
   return (
-    <div style={{ width: '100vw', height: '100vh', overflow: 'auto' }}>
-      <Box fill align="center" justify="center">
-        <Button icon={<Add />} label="Add" onClick={onOpen} />
-        {open && (
-          <Layer
-            position="right"
-            full="vertical"
-            modal
-            onClickOutside={onClose}
-            onEsc={onClose}
-          >
-            <Box
-              as="form"
-              fill="vertical"
-              overflow="auto"
-              width="medium"
-              pad="medium"
-              onSubmit={onClose}
+    <MnetUIBase theme={mnet}>
+      <div style={{ width: '100vw', height: '100vh', overflow: 'auto' }}>
+        <Box fill align="center" justify="center">
+          <Button icon={<Add />} label="Add" onClick={onOpen} />
+          {open && (
+            <Layer
+              position="right"
+              full="vertical"
+              modal
+              onClickOutside={onClose}
+              onEsc={onClose}
             >
-              <Box flex={false} direction="row" justify="between">
-                <Heading level={2} margin="none">
-                  Add
-                </Heading>
-                <Button icon={<Close />} onClick={onClose} />
-              </Box>
-              <Box flex="grow" overflow="auto" pad={{ vertical: 'medium' }}>
-                <FormField label="First">
-                  <TextInput suggestions={suggestions} />
-                </FormField>
-                <FormField label="Second">
-                  <Select
-                    options={[
-                      'one',
-                      'two',
-                      'three',
-                      'four',
-                      'five',
-                      'six',
-                      'seven',
-                      'eight',
-                    ]}
-                    value={select}
-                    onSearch={() => {}}
-                    onChange={({ option }) => setSelect(option)}
+              <Box
+                as="form"
+                fill="vertical"
+                overflow="auto"
+                width="medium"
+                pad="medium"
+                onSubmit={onClose}
+              >
+                <Box flex={false} direction="row" justify="between">
+                  <Heading level={2} margin="none">
+                    Add
+                  </Heading>
+                  <Button icon={<Close />} onClick={onClose} />
+                </Box>
+                <Box flex="grow" overflow="auto" pad={{ vertical: 'medium' }}>
+                  <FormField label="First">
+                    <TextInput suggestions={suggestions} />
+                  </FormField>
+                  <FormField label="Second">
+                    <Select
+                      options={[
+                        'one',
+                        'two',
+                        'three',
+                        'four',
+                        'five',
+                        'six',
+                        'seven',
+                        'eight',
+                      ]}
+                      value={select}
+                      onSearch={() => {}}
+                      onChange={({ option }) => setSelect(option)}
+                    />
+                  </FormField>
+                  <FormField label="Third">
+                    <TextArea />
+                  </FormField>
+                </Box>
+                <Box flex={false} as="footer" align="start">
+                  <Button
+                    type="submit"
+                    label="Submit"
+                    onClick={onClose}
+                    primary
                   />
-                </FormField>
-                <FormField label="Third">
-                  <TextArea />
-                </FormField>
+                </Box>
               </Box>
-              <Box flex={false} as="footer" align="start">
-                <Button
-                  type="submit"
-                  label="Submit"
-                  onClick={onClose}
-                  primary
-                />
-              </Box>
-            </Box>
-          </Layer>
-        )}
-      </Box>
-    </div>
+            </Layer>
+          )}
+        </Box>
+      </div>
+    </MnetUIBase>
   );
 };
 

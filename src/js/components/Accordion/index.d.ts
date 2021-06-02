@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { AnimateType } from '../../utils';
 import { BoxProps } from '../Box';
-import { BoxProps } from '../Box';
 
 export interface AccordionProps {
   activeIndex?: number | number[];
@@ -11,6 +10,11 @@ export interface AccordionProps {
   messages?: { tabContents?: string };
 }
 
-declare const Accordion: React.FC<BoxProps & AccordionProps & JSX.IntrinsicElements['div']>;
+export interface AccordionExtendedProps
+  extends AccordionProps,
+    BoxProps,
+    Omit<JSX.IntrinsicElements['div'], 'onClick'> {}
+
+declare const Accordion: React.FC<AccordionExtendedProps>;
 
 export { Accordion };

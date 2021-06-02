@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-import { Box, Button, Drop } from 'mnet-ui-base';
+import { Box, Button, Drop, MnetUIBase, mnet } from 'mnet-ui-base';
 
 const ProgressiveDrop = () => {
   const boxRef = useRef();
@@ -23,46 +23,48 @@ const ProgressiveDrop = () => {
   };
 
   return (
-    <div style={{ width: '100vw', height: '100vh', overflow: 'auto' }}>
-      <Box fill align="center" justify="center">
-        <Button ref={boxRef} primary label="Click me" onClick={onOpenDrop} />
-        {openDrop && (
-          <Drop
-            target={boxRef.current}
-            onClickOutside={onCloseDrop}
-            onEsc={onCloseDrop}
-          >
-            <Box pad="large" ref={innerBoxRef}>
-              <Button
-                primary
-                label="Click me again"
-                onClick={() => setOpenInnerDrop(true)}
-              />
-            </Box>
-            {openInnerDrop && (
-              <Drop
-                target={innerBoxRef.current}
-                onClickOutside={() => setOpenInnerDrop(false)}
-                onEsc={() => setOpenInnerDrop(false)}
-                align={{ top: 'bottom', right: 'right' }}
-              >
-                <Box pad="large">
-                  <Button
-                    primary
-                    label={
-                      interactedWithInnerButton
-                        ? 'Good job!'
-                        : 'You can interact with me'
-                    }
-                    onClick={() => setInteractedWithInnerButton(true)}
-                  />
-                </Box>
-              </Drop>
-            )}
-          </Drop>
-        )}
-      </Box>
-    </div>
+    <MnetUIBase theme={mnet}>
+      <div style={{ width: '100vw', height: '100vh', overflow: 'auto' }}>
+        <Box fill align="center" justify="center">
+          <Button ref={boxRef} primary label="Click me" onClick={onOpenDrop} />
+          {openDrop && (
+            <Drop
+              target={boxRef.current}
+              onClickOutside={onCloseDrop}
+              onEsc={onCloseDrop}
+            >
+              <Box pad="large" ref={innerBoxRef}>
+                <Button
+                  primary
+                  label="Click me again"
+                  onClick={() => setOpenInnerDrop(true)}
+                />
+              </Box>
+              {openInnerDrop && (
+                <Drop
+                  target={innerBoxRef.current}
+                  onClickOutside={() => setOpenInnerDrop(false)}
+                  onEsc={() => setOpenInnerDrop(false)}
+                  align={{ top: 'bottom', right: 'right' }}
+                >
+                  <Box pad="large">
+                    <Button
+                      primary
+                      label={
+                        interactedWithInnerButton
+                          ? 'Good job!'
+                          : 'You can interact with me'
+                      }
+                      onClick={() => setInteractedWithInnerButton(true)}
+                    />
+                  </Box>
+                </Drop>
+              )}
+            </Drop>
+          )}
+        </Box>
+      </div>
+    </MnetUIBase>
   );
 };
 
