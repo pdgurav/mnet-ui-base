@@ -39,7 +39,11 @@ var MultiSelect = function MultiSelect(_ref) {
       _ref$shouldRenderInDr = _ref.shouldRenderInDrop,
       shouldRenderInDrop = _ref$shouldRenderInDr === void 0 ? true : _ref$shouldRenderInDr,
       placeholder = _ref.placeholder,
-      rest = _objectWithoutPropertiesLoose(_ref, ["width", "height", "options", "value", "labelKey", "valueKey", "onValueChange", "layout", "onSearch", "searchPlaceholder", "emptySearchMessage", "withSelectAll", "withOptionChips", "withUpdateCancelButtons", "searchable", "custom", "withInclusionExclusion", "isExcluded", "onIncExcChange", "renderEmptySelected", "gridArea", "validate", "size", "isOpenState", "isEnableOutSideClick", "shouldRenderInDrop", "placeholder"]);
+      _ref$removeSelected = _ref.removeSelected,
+      removeSelected = _ref$removeSelected === void 0 ? true : _ref$removeSelected,
+      _ref$reverse = _ref.reverse,
+      reverse = _ref$reverse === void 0 ? false : _ref$reverse,
+      rest = _objectWithoutPropertiesLoose(_ref, ["width", "height", "options", "value", "labelKey", "valueKey", "onValueChange", "layout", "onSearch", "searchPlaceholder", "emptySearchMessage", "withSelectAll", "withOptionChips", "withUpdateCancelButtons", "searchable", "custom", "withInclusionExclusion", "isExcluded", "onIncExcChange", "renderEmptySelected", "gridArea", "validate", "size", "isOpenState", "isEnableOutSideClick", "shouldRenderInDrop", "placeholder", "removeSelected", "reverse"]);
 
   var _useState = useState(valueProp),
       internalValue = _useState[0],
@@ -172,7 +176,9 @@ var MultiSelect = function MultiSelect(_ref) {
         custom: custom,
         validate: validate,
         shouldRenderInDrop: shouldRenderInDrop,
-        showCount: showCount
+        showCount: showCount,
+        removeSelected: removeSelected,
+        reverse: reverse
       }, props));
     }
 
@@ -226,7 +232,8 @@ var MultiSelect = function MultiSelect(_ref) {
     emptySearchMessage: emptySearchMessage,
     isEnableOutSideClick: isEnableOutSideClick,
     shouldRenderInDrop: shouldRenderInDrop,
-    size: size
+    size: size,
+    placeholder: placeholder
   }, rest)));
 };
 

@@ -69,7 +69,11 @@ var ColumnSelect = function ColumnSelect(_ref) {
       validate = _ref.validate,
       onChange = _ref.onChange,
       shouldRenderInDrop = _ref.shouldRenderInDrop,
-      showCount = _ref.showCount;
+      showCount = _ref.showCount,
+      _ref$removeSelected = _ref.removeSelected,
+      removeSelected = _ref$removeSelected === void 0 ? true : _ref$removeSelected,
+      _ref$reverse = _ref.reverse,
+      reverse = _ref$reverse === void 0 ? false : _ref$reverse;
 
   var theme = (0, _react.useContext)(_styledComponents.ThemeContext) || _defaultProps.defaultProps.theme;
 
@@ -197,7 +201,8 @@ var ColumnSelect = function ColumnSelect(_ref) {
       isExcluded: isExcluded,
       index: SELECT_ALL_INDEX,
       onSelect: setOption,
-      active: activeIndex === -1
+      active: activeIndex === -1,
+      reverse: reverse
     })), /*#__PURE__*/_react["default"].createElement(_StyledMultiSelect.SelectOption // eslint-disable-next-line react/no-array-index-key
     , {
       key: index,
@@ -206,7 +211,7 @@ var ColumnSelect = function ColumnSelect(_ref) {
       role: "menuitem",
       a11yTitle: "option id - " + option.id,
       hoverIndicator: theme.select.activeColor,
-      disabled: optionDisabled || optionSelected || undefined,
+      disabled: optionDisabled || removeSelected && optionSelected || undefined,
       active: optionActive,
       selected: optionSelected,
       option: option,
@@ -216,6 +221,8 @@ var ColumnSelect = function ColumnSelect(_ref) {
         return optionSelect(event, index);
       } : undefined
     }, /*#__PURE__*/_react["default"].createElement(_OptionWithCheckControl.OptionWithCheckControl, {
+      removeSelected: removeSelected,
+      reverse: reverse,
       selected: optionSelected,
       label: optionLabel(index),
       inclusionExclusion: inclusionExclusion,

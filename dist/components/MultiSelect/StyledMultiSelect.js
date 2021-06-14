@@ -27,7 +27,7 @@ var SelectedOption = (0, _styledComponents["default"])(_Box.Box).withConfig({
   displayName: "StyledMultiSelect__SelectedOption",
   componentId: "sc-1yaxkjp-1"
 })(["", ""], function (props) {
-  return props.selected && disabledStyle;
+  return props.selected && props.removeSelected && disabledStyle;
 });
 exports.SelectedOption = SelectedOption;
 var OptionsBox = (0, _styledComponents["default"])(_Box.Box).withConfig({
@@ -59,10 +59,10 @@ exports.OptionBox = OptionBox;
 var CheckBox = (0, _styledComponents["default"])(_Box.Box).withConfig({
   displayName: "StyledMultiSelect__CheckBox",
   componentId: "sc-1yaxkjp-6"
-})(["", ";", ""], function (props) {
-  return props.theme.multiselect.checkbox.check;
-}, function (props) {
+})(["", " ", ";"], function (props) {
   return props.background && "background: " + props.background + ";";
+}, function (props) {
+  return props.theme.multiselect.checkbox.check;
 });
 exports.CheckBox = CheckBox;
 var OptionWrapper = (0, _styledComponents["default"])(_Box.Box).withConfig({

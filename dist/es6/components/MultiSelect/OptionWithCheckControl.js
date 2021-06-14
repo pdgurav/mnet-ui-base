@@ -18,6 +18,8 @@ var OptionWithCheckControl = function OptionWithCheckControl(_ref) {
       inclusionExclusion = _ref.inclusionExclusion,
       isExcluded = _ref.isExcluded,
       onSelect = _ref.onSelect,
+      removeSelected = _ref.removeSelected,
+      reverse = _ref.reverse,
       index = _ref.index;
   var theme = useContext(ThemeContext) || defaultProps.theme;
 
@@ -89,14 +91,21 @@ var OptionWithCheckControl = function OptionWithCheckControl(_ref) {
     }), (selected || showUnSelected || inclusionExclusion && isExcluded === null) && getIcon(check)));
   };
 
-  return /*#__PURE__*/React.createElement(SelectedOption, _extends({}, selectOptionsStyle, {
-    selected: selected
-  }), /*#__PURE__*/React.createElement(Box, theme.multiselect.option, /*#__PURE__*/React.createElement(Box, null, /*#__PURE__*/React.createElement(Text, _extends({
+  var optionLabel = [/*#__PURE__*/React.createElement(Box, null, /*#__PURE__*/React.createElement(Text, _extends({
     role: "option",
     "aria-label": "multiselect option value"
-  }, theme.select.options.text), label)), !inclusionExclusion && /*#__PURE__*/React.createElement(Box, null, renderCheckbox(incCheck, null)), inclusionExclusion && (isExcluded === null || isExcluded !== null) && /*#__PURE__*/React.createElement(Box, {
+  }, theme.select.options.text), label)), /*#__PURE__*/React.createElement(React.Fragment, null, !inclusionExclusion && /*#__PURE__*/React.createElement(Box, null, renderCheckbox(selected ? incCheck : excCheck, null)), inclusionExclusion && (isExcluded === null || isExcluded !== null) && /*#__PURE__*/React.createElement(Box, {
     direction: "row"
-  }, [null, false].includes(isExcluded) && renderCheckbox(incCheck, false), [null, true].includes(isExcluded) && renderCheckbox(excCheck, true))));
+  }, [null, false].includes(isExcluded) && renderCheckbox(incCheck, false), [null, true].includes(isExcluded) && renderCheckbox(excCheck, true)))];
+
+  if (reverse) {
+    optionLabel.reverse();
+  }
+
+  return /*#__PURE__*/React.createElement(SelectedOption, _extends({}, selectOptionsStyle, {
+    selected: selected,
+    removeSelected: removeSelected
+  }), /*#__PURE__*/React.createElement(Box, theme.multiselect.option, optionLabel));
 };
 
 export { OptionWithCheckControl };

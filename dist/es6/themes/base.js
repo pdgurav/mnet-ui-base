@@ -1080,7 +1080,6 @@ export var generate = function generate(baseSpacing, scale) {
           margin: 'auto',
           round: 'small',
           align: 'center',
-          background: 'white',
           border: {
             color: 'light-6'
           },

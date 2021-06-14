@@ -14,7 +14,7 @@ var SelectedOption = styled(Box).withConfig({
   displayName: "StyledMultiSelect__SelectedOption",
   componentId: "sc-1yaxkjp-1"
 })(["", ""], function (props) {
-  return props.selected && disabledStyle;
+  return props.selected && props.removeSelected && disabledStyle;
 });
 var OptionsBox = styled(Box).withConfig({
   displayName: "StyledMultiSelect__OptionsBox",
@@ -41,10 +41,10 @@ var OptionBox = styled(Box).withConfig({
 var CheckBox = styled(Box).withConfig({
   displayName: "StyledMultiSelect__CheckBox",
   componentId: "sc-1yaxkjp-6"
-})(["", ";", ""], function (props) {
-  return props.theme.multiselect.checkbox.check;
-}, function (props) {
+})(["", " ", ";"], function (props) {
   return props.background && "background: " + props.background + ";";
+}, function (props) {
+  return props.theme.multiselect.checkbox.check;
 });
 var OptionWrapper = styled(Box).withConfig({
   displayName: "StyledMultiSelect__OptionWrapper",

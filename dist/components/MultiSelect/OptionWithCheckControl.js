@@ -37,6 +37,8 @@ var OptionWithCheckControl = function OptionWithCheckControl(_ref) {
       inclusionExclusion = _ref.inclusionExclusion,
       isExcluded = _ref.isExcluded,
       onSelect = _ref.onSelect,
+      removeSelected = _ref.removeSelected,
+      reverse = _ref.reverse,
       index = _ref.index;
 
   var theme = (0, _react.useContext)(_styledComponents.ThemeContext) || _defaultProps.defaultProps.theme;
@@ -109,14 +111,21 @@ var OptionWithCheckControl = function OptionWithCheckControl(_ref) {
     }), (selected || showUnSelected || inclusionExclusion && isExcluded === null) && getIcon(check)));
   };
 
-  return /*#__PURE__*/_react["default"].createElement(_StyledMultiSelect.SelectedOption, _extends({}, selectOptionsStyle, {
-    selected: selected
-  }), /*#__PURE__*/_react["default"].createElement(_Box.Box, theme.multiselect.option, /*#__PURE__*/_react["default"].createElement(_Box.Box, null, /*#__PURE__*/_react["default"].createElement(_Text.Text, _extends({
+  var optionLabel = [/*#__PURE__*/_react["default"].createElement(_Box.Box, null, /*#__PURE__*/_react["default"].createElement(_Text.Text, _extends({
     role: "option",
     "aria-label": "multiselect option value"
-  }, theme.select.options.text), label)), !inclusionExclusion && /*#__PURE__*/_react["default"].createElement(_Box.Box, null, renderCheckbox(incCheck, null)), inclusionExclusion && (isExcluded === null || isExcluded !== null) && /*#__PURE__*/_react["default"].createElement(_Box.Box, {
+  }, theme.select.options.text), label)), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, !inclusionExclusion && /*#__PURE__*/_react["default"].createElement(_Box.Box, null, renderCheckbox(selected ? incCheck : excCheck, null)), inclusionExclusion && (isExcluded === null || isExcluded !== null) && /*#__PURE__*/_react["default"].createElement(_Box.Box, {
     direction: "row"
-  }, [null, false].includes(isExcluded) && renderCheckbox(incCheck, false), [null, true].includes(isExcluded) && renderCheckbox(excCheck, true))));
+  }, [null, false].includes(isExcluded) && renderCheckbox(incCheck, false), [null, true].includes(isExcluded) && renderCheckbox(excCheck, true)))];
+
+  if (reverse) {
+    optionLabel.reverse();
+  }
+
+  return /*#__PURE__*/_react["default"].createElement(_StyledMultiSelect.SelectedOption, _extends({}, selectOptionsStyle, {
+    selected: selected,
+    removeSelected: removeSelected
+  }), /*#__PURE__*/_react["default"].createElement(_Box.Box, theme.multiselect.option, optionLabel));
 };
 
 exports.OptionWithCheckControl = OptionWithCheckControl;
