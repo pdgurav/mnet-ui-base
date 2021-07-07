@@ -4,10 +4,9 @@ import { ThemeContext } from 'styled-components';
 import { defaultProps } from '../../default-props';
 
 import { Box } from '../Box';
-import { Text } from '../Text';
 import { Drop } from '../Drop';
 
-import { ArrowWrap, Arrow } from './StyledTooltip';
+import { ArrowWrap, Arrow, StyledTooltipText } from './StyledTooltip';
 
 const Tooltip = forwardRef(
   (
@@ -71,7 +70,7 @@ const Tooltip = forwardRef(
             target={overRef.current}
             elevation="none"
             plain
-            style={{ boxShadow: null, maxWidth: tooptip.maxWidth }}
+            style={{ boxShadow: tooptip.boxShadow, maxWidth: tooptip.maxWidth }}
           >
             <ArrowWrap position={position}>
               <Arrow position={position} showArrow={showArrow} />
@@ -80,7 +79,9 @@ const Tooltip = forwardRef(
                 background={tooptip.background || 'dark-1'}
                 round={tooptip.round}
               >
-                <Text color={tooptip.color}>{message}</Text>
+                <StyledTooltipText color={tooptip.color} {...tooptip.text}>
+                  {message}
+                </StyledTooltipText>
               </Box>
             </ArrowWrap>
           </Drop>
