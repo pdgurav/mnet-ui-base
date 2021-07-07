@@ -111,7 +111,7 @@ var Tooltip = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
     }
   }, /*#__PURE__*/_react["default"].createElement(_StyledTooltip.ArrowWrap, {
     position: position,
-    background: tooptip.background || 'dark-1'
+    background: !showArrow && (tooptip.background || 'dark-1')
   }, /*#__PURE__*/_react["default"].createElement(_StyledTooltip.Arrow, {
     position: position,
     showArrow: showArrow

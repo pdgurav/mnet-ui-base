@@ -94,7 +94,7 @@ var Tooltip = /*#__PURE__*/forwardRef(function (_ref, ref) {
     }
   }, /*#__PURE__*/React.createElement(ArrowWrap, {
     position: position,
-    background: tooptip.background || 'dark-1'
+    background: !showArrow && (tooptip.background || 'dark-1')
   }, /*#__PURE__*/React.createElement(Arrow, {
     position: position,
     showArrow: showArrow
