@@ -1553,7 +1553,8 @@ export var generate = function generate(baseSpacing, scale) {
       color: 'dark-1',
       tipSize: '5px',
       round: 'small',
-      maxWidth: '20%'
+      maxWidth: '20%',
+      text: undefined
     },
     pagination: {
       background: 'white',

@@ -11,8 +11,6 @@ var _defaultProps = require("../../default-props");
 
 var _Box = require("../Box");
 
-var _Text = require("../Text");
-
 var _Drop = require("../Drop");
 
 var _StyledTooltip = require("./StyledTooltip");
@@ -108,7 +106,7 @@ var Tooltip = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
     elevation: "none",
     plain: true,
     style: {
-      boxShadow: null,
+      boxShadow: tooptip.boxShadow,
       maxWidth: tooptip.maxWidth
     }
   }, /*#__PURE__*/_react["default"].createElement(_StyledTooltip.ArrowWrap, {
@@ -120,9 +118,9 @@ var Tooltip = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
     pad: tooptip.pad,
     background: tooptip.background || 'dark-1',
     round: tooptip.round
-  }, /*#__PURE__*/_react["default"].createElement(_Text.Text, {
+  }, /*#__PURE__*/_react["default"].createElement(_StyledTooltip.StyledTooltipText, _extends({
     color: tooptip.color
-  }, message)))));
+  }, tooptip.text), message)))));
 });
 exports.Tooltip = Tooltip;
 Tooltip.displayName = 'Tooltip';
