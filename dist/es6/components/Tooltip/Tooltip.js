@@ -93,7 +93,8 @@ var Tooltip = /*#__PURE__*/forwardRef(function (_ref, ref) {
       maxWidth: tooptip.maxWidth
     }
   }, /*#__PURE__*/React.createElement(ArrowWrap, {
-    position: position
+    position: position,
+    background: tooptip.background || 'dark-1'
   }, /*#__PURE__*/React.createElement(Arrow, {
     position: position,
     showArrow: showArrow

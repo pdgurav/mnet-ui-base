@@ -1584,7 +1584,10 @@ var generate = function generate(baseSpacing, scale) {
       tipSize: '5px',
       round: 'small',
       maxWidth: '20%',
-      text: undefined
+      text: undefined,
+      dropProps: {
+        left: 'right'
+      }
     },
     pagination: {
       background: 'white',
