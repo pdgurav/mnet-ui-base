@@ -3,7 +3,7 @@ name: Node CI
 on:
   push:
     branches:
-      - releases/pdgurav-patch-1
+      - origin/pdgurav-patch-1
 
 jobs:
   build:
