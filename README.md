@@ -40,7 +40,7 @@ For Yarn users:
 
 ## Release History
 
-See the [Change Log].
+See the [Change Log]..
 
 ## Based on
 
