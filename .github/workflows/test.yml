@@ -28,7 +28,7 @@ jobs:
           mkdir -p "$GITHUB_WORKSPACE/.temp/mnet-ui-base"        
           git clone "https://$GITHUB_ACTOR:$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git" "$GITHUB_WORKSPACE/.temp/mnet-ui-base"
           cd "$GITHUB_WORKSPACE/.temp/mnet-ui-base"
-          git checkout -b pdgurav-patch-2
+          git checkout pdgurav-patch-2
           git pull origin pdgurav-patch-1
           mv .git ../
           rm -rf *
