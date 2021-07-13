@@ -44,4 +44,4 @@ See the [Change Log].
 
 ## Based on
 
-- [grommet v2](https://v2.grommet.io/) streamline the way you develop 
+- [grommet v2](https://v2.grommet.io/) streamline the way you develop apps.
