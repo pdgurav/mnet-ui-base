@@ -2,8 +2,8 @@ name: test ci
 
 on:
   push:
-    branches-ignore:
-      - master
+    branches:
+      - pdgurav-patch-1
 
 jobs:
   build:
