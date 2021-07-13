@@ -42,6 +42,6 @@ For Yarn users:
 
 See the [Change Log].
 
-## Based on
+## Based on d
 
 - [grommet v2](https://v2.grommet.io/) streamline the way you develop apps.
