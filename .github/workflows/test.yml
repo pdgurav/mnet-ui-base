@@ -1,9 +1,9 @@
-name: Node CI
+name: test ci
 
 on:
   push:
-    branches:
-      - pdgurav-patch-1
+    branches-ignore:
+      - master
 
 jobs:
   build:
